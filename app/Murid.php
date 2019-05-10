@@ -14,4 +14,8 @@ class Murid extends Model
     public function kelas(){
     	return $this->hasMany('App\Kelas');
     }
+    public function user(){
+    	return $this->belongsTo('App\User');
+    }
+
 }

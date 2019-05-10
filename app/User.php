@@ -39,9 +39,12 @@ class User extends Authenticatable
     ];
 
         public function kelas(){
-        return $this->hasMany('App\Kelas');
+            return $this->hasMany('App\Kelas');
         }
         public function tugas(){
-        return $this->hasMany('App\Tugas');
+            return $this->hasMany('App\Tugas');
+        }
+        public function murid(){
+            return $this->belongsTo('App\Murid');
         }
     }

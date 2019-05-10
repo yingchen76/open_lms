@@ -17,4 +17,7 @@ class Tugas extends Model
     public function murid(){
     	return $this->hasMany('App\Murid');
     }
+    public function upload(){
+        return $this->hasMany('App\Upload');
+    }
 }

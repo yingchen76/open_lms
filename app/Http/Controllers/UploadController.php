@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Prodi;
+use App\Tugas;
+use App\Kelas;
+use App\User;
+use App\Upload;
 
-class ProdiController extends Controller
+class UploadController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
-        $prodis = Prodi::all();
-        return view('prodi.index', compact('prodis'));
+        $tugas= Tugas::find($id);
+        return view('tugas.upload',compact('tugas'));
     }
 
     /**
@@ -35,9 +38,29 @@ class ProdiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
         //
+        //$user= User::all();
+        $kelas= Tugas::find($id);
+        $tugas = new Upload();
+        $request->validate([
+            'tugas_id'=> 'required',
+            'user_id' => 'required',
+        ]);
+        $tempat_upload = public_path('/uploadx');
+        $file = $request->file('file_tugas');
+        $ext = $file->getClientOriginalExtension();
+        $namafile= $file->getClientOriginalName();
+        $filename = $namafile . "." . $ext;
+        $file->move($tempat_upload, $filename);
+        
+
+        $tugas->tugas_id = $request->id_tugas; 
+        $tugas->user_id = $request->id_user;
+        $tugas->file_tugas = $filename;
+        $tugas->save();
+        return redirect('/kelas');
     }
 
     /**

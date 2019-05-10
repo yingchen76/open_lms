@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMuridsTable extends Migration
+class CreateUploadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateMuridsTable extends Migration
      */
     public function up()
     {
-        Schema::create('murids', function (Blueprint $table) {
+        Schema::create('uploads', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('kelas_id');
+            $table->integer('tugas_id');
             $table->integer('user_id');
+            $table->String('file_tugas');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateMuridsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('murids');
+        Schema::dropIfExists('uploads');
     }
 }

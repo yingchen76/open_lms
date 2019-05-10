@@ -29,7 +29,7 @@ class TugasController extends Controller
     public function create()
     {
         //
-        $s = User::all();
+        $kelas = User::all();
         return view('tugas.index', compact('kelas'));
     }
 
@@ -53,30 +53,29 @@ class TugasController extends Controller
         $kelas= Kelas::find($id);
         $tugas = new Tugas();
         $request->validate([
-            'id_kelas'=> 'required',
+            'kelas_id'=> 'required',
             'nama_tugas' => 'required',
             'deskripsi' => 'required',
-            // 'file_tugas' => 'image|mimes: docx, doc, jpg, png, rtf, zip, rar, pdf',
+            //'file_tugas' => 'file|image|mimes: doc,docx,jpeg,pdf,JPG,png,svg',
             'deadline'=> 'required'
             
         ]);
 
-        $tempat_upload = public_path("/file");
+        $tempat_upload = public_path('/file');
         $file = $request->file('file_tugas');
         $ext = $file->getClientOriginalExtension();
-        $timestamp = now()->timestamp;
-        $filename = $timestamp . "_" . $tugas->id_kelas . "." . $ext;
+        $namafile= $file->getClientOriginalName();
+        $filename = $namafile . "." . $ext;
         $file->move($tempat_upload, $filename);
         
 
-        $tugas->kelas_id=$request->id_kelas; 
-        $tugas->nama_tugas=$request->nama_tugas;
-        $tugas->deskripsi=$request->deskripsi;
-        $tugas->file_tugas=$filename;
-        $tugas->deadline=$request->deadline;
+        $tugas->kelas_id = $request->kelas_id; 
+        $tugas->nama_tugas = $request->nama_tugas;
+        $tugas->deskripsi = $request->deskripsi;
+        $tugas->file_tugas = $filename;
+        $tugas->deadline = $request->deadline;
         $tugas->save();
         return redirect('/kelas');
-
     }
 
     /**

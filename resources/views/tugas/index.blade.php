@@ -6,7 +6,11 @@
 	<h1>Kelas</h1>
 @stop
 
-
+<div>
+	@foreach($errors->all() as $message)
+		<div>{{$message}}</div>
+	@endforeach
+</div>
 @section('content')
 	<div>
 		<a href="/tugas/lihat/{{$kelas->id}}" class="btn btn-primary">Lihat Tugas</a>

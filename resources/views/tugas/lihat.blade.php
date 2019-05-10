@@ -19,8 +19,8 @@
 							<th>Action</th>
 						</tr>
 			</tr>
+			@foreach ($tugas as $tugas)
 			<tr>
-				@foreach ($tugas as $tugas)
 		@if ($kelas->id == $tugas->kelas_id)
 		<td>{{$tugas->nama_tugas}}</td>
 		<td>{{$tugas->deskripsi}}</td>
@@ -28,10 +28,11 @@
 		<td>{{$tugas->deadline}}</td>
 		<td>
 			<a href="/file/{{$tugas->file_tugas}}" class="btn btn-primary btn-sm col-md-5">Download</a>
+			<a href="/tugas/upload/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5">Upload</a>
 		</td>
 		@endif
-		@endforeach
 		</tr>
+		@endforeach
 </table>
 	</form>
 

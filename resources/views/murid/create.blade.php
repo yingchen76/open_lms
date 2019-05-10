@@ -1,5 +1,11 @@
 @extends('layouts.app')
 @section('content')
+<div>
+	@foreach($errors->all() as $message)
+		<div>{{$message}}</div>
+	@endforeach
+	
+</div>
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-md-8">
@@ -17,12 +23,12 @@
 						</div>
 						<div class="form-group">
 							<label>Email Murid</label>
-							<input type="text" name="nama" class="form-control">
+							<input type="text" name="email" class="form-control">
 						</div>
 						<button type="submit" class="btn btn-primary">Simpan</button>
 					</form>
-
 				</div>
+				
 			<div>
 				<table class="table table-stripped">
 					<tr>
@@ -30,10 +36,10 @@
 						<td>nama murid</td>
 					</tr>
 					@foreach ($murid as $mk)
-					@if ($mk->id_kelas == $kelas->id)
+					@if ($mk->kelas_id == $kelas->id)
 					<tr>
-						<td>{{$mk->kelas->nama}}</td>
-						<td>{{$mk->id_murid}}</td>
+						<td>{{$mk->kelas_id}}</td>
+						<td>{{$mk->user_id}}</td>
 					</tr>
 					@endif
 					@endforeach

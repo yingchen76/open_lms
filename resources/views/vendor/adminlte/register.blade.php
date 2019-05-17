@@ -4,7 +4,11 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/css/auth.css') }}">
     @yield('css')
 @stop
-
+<div>
+    @foreach($errors->all() as $message)
+        <div>{{$message}}</div>
+    @endforeach
+</div>
 @section('body_class', 'register-page')
 
 @section('body')
@@ -15,7 +19,7 @@
 
         <div class="register-box-body">
             <p class="login-box-msg">{{ trans('adminlte::adminlte.register_message') }}</p>
-            <form action="{{ url(config('adminlte.register_url', 'register')) }}" method="post">
+            <form action="{{ url(config('adminlte.register_url', 'register')) }}" method="post" enctype="multipart/form-data">
                 {!! csrf_field() !!}
 
                 <div class="form-group has-feedback {{ $errors->has('name') ? 'has-error' : '' }}">
@@ -58,6 +62,16 @@
                         </span>
                     @endif
                 </div>
+                 <div class="form-group{{ $errors->has('profile_picture') ? ' has-error' : '' }}">
+            <label for="name" class="col-md-6 control-label">Profile Picture</label>
+        <input id="profilePicture" type="file" class="form-control" name="profile_picture">
+
+        @if ($errors->has('profile_picture'))
+            <span class="help-block">
+                <strong>{{ $errors->first('profile_picture') }}</strong>
+            </span>
+        @endif
+    </div>
                 <button type="submit"
                         class="btn btn-primary btn-block btn-flat"
                 >{{ trans('adminlte::adminlte.register') }}</button>

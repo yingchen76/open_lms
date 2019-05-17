@@ -5,20 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Kelas;
 use App\User;
-
+use App\Tugas;
+use App\Murid;
 class KelasController extends Controller
 {
     public function index()
     {
         // 
+        $murid = Murid::all();
+        $tugas= Tugas::all();
         $kelas = Kelas::all();
         return view('kelas.index', compact('kelas')); 
     }
     public function lihat($id)
     {
         // 
+        $tugases = Tugas::all();
+        $murid = Murid::all();
         $kelas = Kelas::find($id);
-        return view('kelas.lihat', compact('kelas')); 
+        return view('kelas.lihat', compact('kelas', 'tugases', 'murid')); 
     }
     
     public function create()
@@ -28,6 +33,7 @@ class KelasController extends Controller
             return view('kelas.create', compact('users'));
         
     }
+  
     public function store(Request $request)
     {
         //

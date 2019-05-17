@@ -8,17 +8,19 @@
 
 
 @section('content')
+<!-- START CUSTOM TABS -->
 
-<a href="kelas/new" class="btn btn-primary">Buat Kelas</a>
-<table class="table table-striped">
+            <a href="kelas/new" class="btn btn-primary">Buat Kelas</a>
+						<table class="table table-striped">
 						<tr>
 							<th>Nama Kelas</th>
 							<th>Jenis Kelas</th>
 							<th>Nama Guru</th>
 							<th>Action</th>
 						</tr>
-						@foreach($kelas as $kelas)
+						
 						<tr>
+							@foreach($kelas as $kelas)
 							@if ($kelas->user->name == Auth::user()->name )
 							<td>{{ $kelas->nama_kelas }}</td>
 							<td>{{ $kelas->jenis_kelas }}</td>
@@ -35,7 +37,12 @@
 								</form>
 							</td>
 							@endif
+							@endforeach
 						</tr>
-						@endforeach
 					</table>
+          </div>
+
+         
 @stop
+		
+      <!-- END CUSTOM TABS -->

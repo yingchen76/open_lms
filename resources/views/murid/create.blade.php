@@ -30,21 +30,7 @@
 				</div>
 				
 			<div>
-				<table class="table table-stripped">
-					<tr>
-						<td>nama kelas</td>
-						<td>nama murid</td>
-					</tr>
-					@foreach ($murid as $mk)
-					@if ($mk->kelas_id == $kelas->id)
-					<tr>
-						<td>{{$mk->kelas_id}}</td>
-						<td>{{$mk->user_id}}</td>
-					</tr>
-					@endif
-					@endforeach
-				</table>
-			</div>
+		</div>
 			</div>
 
 		</div>

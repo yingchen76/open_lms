@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tugas extends Model
 {
-    public $timestamps = false;
     public function tugas(){
     	return $this->belongsTo('App\Kelas');
     }

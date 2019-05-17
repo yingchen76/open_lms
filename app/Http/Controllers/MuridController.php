@@ -9,6 +9,7 @@ use App\Tugas;
 use App\User;
 use Session;
 use DB;
+use Validator;
 
 class MuridController extends Controller
 {
@@ -21,7 +22,7 @@ class MuridController extends Controller
     {
         //
         $murid= Murid::all();
-        return view('murid.index',compact('murid'));
+        return view('murid.index',compact('murid')); 
     }
 
     /**
@@ -45,26 +46,20 @@ class MuridController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function valdation (Request $request, $id){
-        Session::put('kls_id',$id);
-        $kelas = Kelas::find($id);
-        $email = $request->email;
-        $user = User::all();
-        return view('murid.validation', compact('user','kelas'));
-    }
     public function store(Request $request, $id)
     {
-        $m = new Murid();
-        $ids = Session::get('kls_id',$id);
-        $user = User::all();
-        $user_id = User::select('id')->where('email', $request->email);
-        $request->validate([
+       $validator = Validator::make($request->all(),[
             'kelas_id' => 'required',
             'user_id' => 'required'            
         ]);
+        $m = new Murid();
+        $ids = Session::get('kls_id',$id);
+        $user = User::all();
+        $user_id = User::select('id')->where('email', $request->email)->first();
+        $id_user = $user_id->id;
                   
             $m->kelas_id = $request->kelas_id; 
-            $m->user_id = $user_id; 
+            $m->user_id = $id_user; 
             $m->save();
             
             return redirect('kelas/$ids');

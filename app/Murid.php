@@ -12,7 +12,7 @@ class Murid extends Model
     	return $this->hasMany('App\Tugas');
     }
     public function kelas(){
-    	return $this->hasMany('App\Kelas');
+    	return $this->belongsTo('App\Kelas');
     }
     public function user(){
     	return $this->belongsTo('App\User');

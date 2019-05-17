@@ -32,6 +32,16 @@
                         </span>
                     @endif
                 </div>
+                <div class="form-group has-feedback {{ $errors->has('nickname') ? 'has-error' : '' }}">
+                    <input type="text" name="nickname" class="form-control" value="{{ old('nickname') }}"
+                           placeholder="Nickname">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    @if ($errors->has('nickname'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('nickname') }}</strong>
+                        </span>
+                    @endif
+                </div>
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                     <input type="email" name="email" class="form-control" value="{{ old('email') }}"
                            placeholder="{{ trans('adminlte::adminlte.email') }}">
@@ -72,6 +82,38 @@
             </span>
         @endif
     </div>
+                 <div class="form-group has-feedback {{ $errors->has('telepon') ? 'has-error' : '' }}">
+                    <input type="text" name="telepon" class="form-control" value="{{ old('telepon') }}"
+                           placeholder="Telepon">
+                    <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
+                    @if ($errors->has('telepon'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('telepon') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                 <div class="form-group has-feedback {{ $errors->has('deskripsi') ? 'has-error' : '' }}">
+                    <textarea name="deskripsi" class="form-control"
+                           placeholder="Deskripsi">
+                    @if ($errors->has('deskripsi')) 
+                        <span class="help-block">
+                            <strong>{{ $errors->first('deskripsi') }}</strong>
+                        </span>
+                    @endif
+                    </textarea>
+                </div>
+                <div class="form-group has-feedback {{ $errors->has('lokasi') ? 'has-error' : '' }}">
+                    <input type="text" name="lokasi" class="form-control" value="{{ old('lokasi') }}"
+                    placeholder="Lokasi">
+                    <span class="glyphicon glyphicon-road form-control-feedback"></span>
+                    @if ($errors->has('lokasi'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('lokasi') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
                 <button type="submit"
                         class="btn btn-primary btn-block btn-flat"
                 >{{ trans('adminlte::adminlte.register') }}</button>

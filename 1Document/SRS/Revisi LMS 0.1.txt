@@ -1,0 +1,13 @@
+1. siapa saja bisa register
+2. user bisa membuat kelas (jadi guru)
+3. guru dapat menambbahkan murid(user lain) melalui email
+4. atau murid bisa request masuk kelas (jika kelas private)
+5. kelas ada yang priivate dan public
+6. guru upload dokumen serta keteranganya
+7. guru buat tugas yang disertai deadline
+8. murid dapat upload tugas
+9. guru dapat menambah asisten
+10. asisten dapat memberi nilai tugas, di acc dulu oleh guru
+
+- use case satu kotak aja
+- activity diagram

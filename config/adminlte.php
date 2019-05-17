@@ -117,19 +117,14 @@ return [
 
          [
             'text'        => 'Kelas Saya',
-            'url'         => 'kelassaya',
+            'url'         => 'kelas_saya',
             'icon'        => 'file',
         ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
-            'url'  => '#',
+            'url'  => 'profile',
             'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url'  => '#',
-            'icon' => 'lock',
         ],
         
         

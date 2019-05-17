@@ -47,4 +47,7 @@ class User extends Authenticatable
         public function murid(){
             return $this->hasMany('App\Murid');
         }
+         public function post(){
+            return $this->hasMany('App\post');
+        }
     }

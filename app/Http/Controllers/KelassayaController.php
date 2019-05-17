@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Murid;
+use App\post;
 use App\Kelas;
-use App\Tugas;
 use App\User;
-use Session;
-use DB;
-use Validator;
-
-class MuridController extends Controller
+use App\Murid;
+class KelassayaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +16,11 @@ class MuridController extends Controller
      */
     public function index()
     {
-        //
-        $murid= Murid::all();
-        return view('murid.index',compact('murid')); 
+        $kelas = Kelas::all();
+        $post = post::all();
+        $user = User::all();
+        $murid = Murid::all();
+        return view('kelassaya.lihat', compact('post', 'kelas', 'user' ,'murid'));
     }
 
     /**
@@ -30,13 +28,9 @@ class MuridController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
         //
-        // Session::put('kls_id',$id);
-        $murid=Murid::all();
-        $kelas = Kelas::find($id);
-        return view ('murid.create', compact('kelas','murid'));
     }
 
     /**
@@ -45,25 +39,9 @@ class MuridController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-       $validator = Validator::make($request->all(),[
-            'kelas_id' => 'required',
-            'user_id' => 'required'            
-        ]);
-        $m = new Murid();
-        $ids = Session::get('kls_id',$id);
-        $user = User::all();
-        $user_id = User::select('id')->where('email', $request->email)->first();
-        $id_user = $user_id->id;
-                  
-            $m->kelas_id = $request->kelas_id; 
-            $m->user_id = $id_user; 
-            $m->save();
-            
-            return redirect('kelas/lihat/'.$request->kelas_id);
-        
+        //
     }
 
     /**

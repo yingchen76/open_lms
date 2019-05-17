@@ -32,10 +32,43 @@
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane" id="one" role="tabpanel" aria-labelledby="one-tab">
           	<br>
+          	<div>
+	@foreach($errors->all() as $message)
+		<div>{{$message}}</div>
+	@endforeach
+</div>
+          	<div>
+          		<div>
+					@foreach($errors->all() as $message)
+						<div>{{$message}}</div>
+					@endforeach
+				</div>
+          		<form action="{{ url('/kelas/post/' .$kelas->id) }}" method="post">
+          			{{ csrf_field() }}
+          			<input type="text" class="form-control" name="isi">
+          			<input type="hidden" value="{{$kelas->id}}" name="kelas_id">
+          			<div class="form-group">
+          				<input type="hidden" value="{{Auth::user()->id}}" name="user_id">
+          			</div>
+          			<button type="submit" class="btn btn-primary">Post</button>
+          		</form>
+          	</div>
 			<div>
 				<div class="box-body">
               <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
 	              <ul class="todo-list">
+	              	@foreach($post as $post)
+	                <li>
+	                  <!-- drag handle -->
+	                  <span class="handle">
+	                        <i class="fa fa-ellipsis-v"></i>
+	                  </span>
+	                  <!-- todo text -->
+	                  <span class="text">{{$post->isi}}</span>
+	                  <!-- Emphasis label -->
+	                  <small class="label label-primary"><i class="fa fa-user-o"></i> {{$post->user->name}}</small>
+	                </li>
+	             @endforeach
 	             @foreach($tugases as $tgs)
 	                <li>
 	                  <!-- drag handle -->
@@ -45,14 +78,7 @@
 	                  <!-- todo text -->
 	                  <span class="text">{{$tgs->nama_tugas}}</span>
 	                  <!-- Emphasis label -->
-	                  <small class="label label-danger"><i class="fa fa-clock-o"></i> {{$tgs->created_at}}</small>
-	                  <!-- General tools such as edit or delete-->
-	                  @if ($kelas->user_id == Auth::user()->id)
-	                  <div class="tools">
-	                    <i class="fa fa-edit"></i>
-	                    <i class="fa fa-trash-o"></i>
-	                  </div>
-	                  @endif
+	                  <small class="label label-success"><i class="fa fa-clock-o"></i> {{$tgs->created_at}}</small>
 	                </li>
 	             @endforeach
 	              </ul>
@@ -90,26 +116,44 @@
 </table>
 	</form>   
 </div>
-<div class="tab-pane" id="three" role="tabpanel" aria-labelledby="three-tab">
-          	<br>
-          	<a href="/murid/create/{{$kelas->id}}" class="btn btn-success">Tambah Siswa</a>
-		<table class="table table-stripped">
-					<tr>
-						<td>nama kelas</td>
-						<td>nama murid</td>
-					</tr>
-					@foreach ($murid as $mk)
-					@if ($mk->kelas_id == $kelas->id)
-					<tr>
-						<td>{{$mk->kelas->nama_kelas}}</td>
-						<td>{{$mk->user->name}}</td>
-					</tr>
-					@endif
-					@endforeach
-				</table>
+		<div class="tab-pane" id="three" role="tabpanel" aria-labelledby="three-tab">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-8">
+						<div class="card">
+							<div class="card-body">
+								<form action="{{url('/murid/new/'.$kelas->id)}}" method="post">
+									{{csrf_field()}}
+										<input type="hidden" name="kelas_id" class="form-control" value="{{$kelas->id}}">
+									<div class="form-group">
+										<label>Email Murid :</label>
+										<input type="text" name="email" class="form-control">
+									</div>
+									<button type="submit" class="btn btn-primary">Simpan</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			</div>
-          	</div>
+		    <br>
+			<table class="table table-striped col-md-12">
+				<tr>
+					<th>Nama Kelas</th>
+					<th>Nama Murid</th>
+				</tr>
+				@foreach ($murid as $mk)
+				@if ($mk->kelas_id == $kelas->id)
+				<tr>
+					<td>{{$mk->kelas->nama_kelas}}</td>
+					<td>{{$mk->user->name}}</td>
+				</tr>
+				@endif
+				@endforeach
+			</table>
+		</div>
+	</div>
+</div>
 
 
 @stop

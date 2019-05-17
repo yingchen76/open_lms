@@ -117,7 +117,7 @@ return [
 
          [
             'text'        => 'Kelas Saya',
-            'url'         => 'kelas_saya',
+            'url'         => 'kelassaya',
             'icon'        => 'file',
         ],
         'ACCOUNT SETTINGS',

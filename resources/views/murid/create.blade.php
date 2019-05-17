@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'AdminLTE')
+
 @section('content')
 <div>
 	@foreach($errors->all() as $message)

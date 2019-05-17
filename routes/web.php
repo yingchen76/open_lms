@@ -28,6 +28,9 @@ Route::post('/kelas/edit/{id}', ['middleware' => 'auth', 'uses' => 'KelasControl
 Route::delete('/kelas/delete/{id}', ['middleware' => 'auth', 'uses' => 'KelasController@destroy']);
 Route::get('/kelas/lihat/{id}', ['middleware' => 'auth', 'uses' => 'KelasController@lihat']);
 Route::get('/kelas/post/{id}', ['middleware' => 'auth', 'uses' => 'KelasController@post']);
+Route::post('/kelas/post/{id}', ['middleware' => 'auth', 'uses' => 'KelasController@post']);
+Route::get('/kelassaya', ['middleware' => 'auth', 'uses' => 'KelassayaController@index']);
+
 Auth::routes();
 Route::get('/tugas/index/{id}', ['middleware' => 'auth', 'uses' => 'TugasController@index']);
 Route::post('/tugas/new/{id}', ['middleware' => 'auth', 'uses' => 'TugasController@store']);

@@ -44,7 +44,10 @@ Route::get('/murid/index/{id}',['middleware' => 'auth', 'uses' => 'MuridControll
 Route::get('/murid/create/{id}',['middleware' => 'auth', 'uses' => 'MuridController@create']);
 Route::get('/murid/new/{id}',['middleware' => 'auth', 'uses' => 'MuridController@store']);
 Route::post('/murid/new/{id}',['middleware' => 'auth', 'uses' => 'MuridController@store']);
+
 Route::get('/profile',['middleware' => 'auth', 'uses' => 'ProfileController@index']);
+Route::get('/profile/edit/{id}',['middleware' => 'auth', 'uses' => 'ProfileController@edit']);
+Route::post('/profile/edit/{id}',['middleware' => 'auth', 'uses' => 'ProfileController@update']);
 
 
 Route::get('/home', 'HomeController@index')->name('home');

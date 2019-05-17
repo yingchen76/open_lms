@@ -61,7 +61,8 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user= User::find($id);
+        return view('profile.edit', compact('user'));
     }
 
     /**
@@ -73,7 +74,33 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'profile_picture' => 'required',
+            'telepon' => 'required',
+            'deskripsi' => 'required',
+            'lokasi' => 'required'            
+        ]);
+
+        $tempat_upload = public_path('/usser_picture');
+        $file = $request->file('profile_picture');
+        $ext = $file->getClientOriginalExtension();
+        $namafile= $file->getClientOriginalName();
+        $filename = $namafile . "." . $ext;
+        
+        $kodepassword = $request->password;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password); 
+        $user->profile_picture = $filename;
+        $user->telepon = $request->telepon;
+        $user->deskripsi = $request->deskripsi;
+        $user->lokasi = $request->lokasi;
+        $user->save();
+        return redirect('/profile');
     }
 
     /**

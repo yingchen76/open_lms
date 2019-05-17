@@ -15,7 +15,7 @@
 	@endforeach
 	
 </div>
-<a href="kelas/new" class="btn btn-primary">Edit Profile</a>
+<a href="profile/edit/{{ Auth::user()->id }}" class="btn btn-primary">Edit Profile</a>
 			<table class="table table-bordered">
 				<tr>
 					<td>Nama Lengkap</td>

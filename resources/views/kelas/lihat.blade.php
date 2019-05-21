@@ -14,7 +14,7 @@
       <div class="card mt-3 tab-card">
         <div class="card-header tab-card-header">
           <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="true">Timeline</a>
             </li>
             <li class="nav-item">
@@ -30,13 +30,8 @@
 </div>
 
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane" id="one" role="tabpanel" aria-labelledby="one-tab">
+          <div class="tab-pane active" id="one" role="tabpanel" aria-labelledby="one-tab">
           	<br>
-          	<div>
-	@foreach($errors->all() as $message)
-		<div>{{$message}}</div>
-	@endforeach
-</div>
           	<div>
           		<div>
 					@foreach($errors->all() as $message)
@@ -53,37 +48,51 @@
           			<button type="submit" class="btn btn-primary">Post</button>
           		</form>
           	</div>
-			<div>
-				<div class="box-body">
-              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-	              <ul class="todo-list">
-	              	@foreach($post as $post)
-	                <li>
-	                  <!-- drag handle -->
-	                  <span class="handle">
-	                        <i class="fa fa-ellipsis-v"></i>
-	                  </span>
-	                  <!-- todo text -->
-	                  <span class="text">{{$post->isi}}</span>
-	                  <!-- Emphasis label -->
-	                  <small class="label label-primary"><i class="fa fa-user-o"></i> {{$post->user->name}}</small>
-	                </li>
-	             @endforeach
-	             @foreach($tugases as $tgs)
-	                <li>
-	                  <!-- drag handle -->
-	                  <span class="handle">
-	                        <i class="fa fa-ellipsis-v"></i>
-	                  </span>
-	                  <!-- todo text -->
-	                  <span class="text">{{$tgs->nama_tugas}}</span>
-	                  <!-- Emphasis label -->
-	                  <small class="label label-success"><i class="fa fa-clock-o"></i> {{$tgs->created_at}}</small>
-	                </li>
-	             @endforeach
-	              </ul>
-	            </div>
-			</div>
+          	<br>
+
+          	<ul class="timeline">
+            <!-- timeline time label -->
+	            <!-- /.timeline-label -->
+	            <!-- timeline item -->
+	            @foreach($post as $post)
+	            <li>
+	              <i class="fa fa-envelope bg-blue"></i>
+
+	              <div class="timeline-item">
+	                <span class="time"><i class="fa fa-clock-o"></i>{{$post -> created_at}}</span>
+
+	                <h3 class="timeline-header"><a href="#">{{$post->user->name}}</a>&nbsp; write a new post</h3>
+
+	                <div class="timeline-body">
+	                	{{$post->isi}}
+	                </div>
+	                <div class="timeline-footer">
+	                  <a class="btn btn-primary btn-xs">Read more</a>
+	                  <a class="btn btn-danger btn-xs">Delete</a>
+	                </div>
+	              </div>
+	            </li>
+	            @endforeach
+	            @foreach($tugases as $tugas)
+	            <li>
+	              <i class="fa fa-envelope bg-blue"></i>
+
+	              <div class="timeline-item">
+	                <span class="time"><i class="fa fa-clock-o"></i>{{$tugas -> created_at}}</span>
+
+	                <h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added a new assignment </h3>
+
+	                <div class="timeline-body">
+	                	<a href="/file/{{$tugas->file_tugas}}">{{$tugas->nama_tugas}}</a>
+	                </div>
+	                <div class="timeline-footer">
+	                  <a class="btn btn-primary btn-xs">Read more</a>
+	                  <a class="btn btn-danger btn-xs">Delete</a>
+	                </div>
+	              </div>
+	            </li>
+	            @endforeach
+        	</ul>
 </div>
 		<div class="tab-pane" id="two" role="tabpanel" aria-labelledby="two-tab">
           	<br>

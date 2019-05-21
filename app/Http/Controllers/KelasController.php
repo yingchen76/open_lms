@@ -24,8 +24,9 @@ class KelasController extends Controller
         $tugases = Tugas::all();
         $murid = Murid::all();
         $post = post::all();
+        $kelass = Kelas::all();
         $kelas = Kelas::find($id);
-        return view('kelas.lihat', compact('kelas', 'tugases', 'murid', 'post')); 
+        return view('kelas.lihat', compact('kelas','kelass', 'tugases', 'murid', 'post')); 
     }
     
     public function create()
@@ -100,6 +101,7 @@ class KelasController extends Controller
     public function destroy($id)
     {
         //
+
         $kelas = Kelas::find($id);
         $kelas->delete();
 

@@ -16,11 +16,8 @@ class KelassayaController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::all();
-        $post = post::all();
-        $user = User::all();
         $murid = Murid::all();
-        return view('kelassaya.lihat', compact('post', 'kelas', 'user' ,'murid'));
+        return view ('kelassaya.lihat', compact('murid'));
     }
 
     /**

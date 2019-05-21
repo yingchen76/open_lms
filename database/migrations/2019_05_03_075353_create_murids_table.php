@@ -16,7 +16,7 @@ class CreateMuridsTable extends Migration
         Schema::create('murids', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('kelas_id');
-            $table->integer('user_id');
+            $table->integer('user_id'); 
             $table->timestamps();
         });
     }

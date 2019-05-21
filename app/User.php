@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'profile_picture',
+        'name', 'nickname', 'email', 'password', 'profile_picture', 'telepon', 'deskripsi','lokasi',
     ];
 
     /**
@@ -46,8 +46,5 @@ class User extends Authenticatable
         }
         public function murid(){
             return $this->hasMany('App\Murid');
-        }
-         public function post(){
-            return $this->hasMany('App\post');
         }
     }

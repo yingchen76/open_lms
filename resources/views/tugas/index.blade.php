@@ -12,31 +12,28 @@
 	@endforeach
 </div>
 @section('content')
-	<div>
-		<a href="/tugas/lihat/{{$kelas->id}}" class="btn btn-primary">Lihat Tugas</a>
-	</div>
 	<form action="{{ url('/tugas/new/'.$kelas->id) }}" enctype='multipart/form-data' method="post">
 		{{csrf_field()}}
 		<div>
 			<label>Kelas</label>
-			<input type="text" name="namakelas" value ="{{$kelas->nama_kelas}}" readonly>
+			<input type="text" name="namakelas" value ="{{$kelas->nama_kelas}}" readonly class="form-control">
 			<input type="hidden" name="kelas_id" value="{{$kelas->id}}">
 		</div>
 		<div>
 			<label>Nama Tugas</label>
-			<input type="text" name="nama_tugas">
+			<input type="text" name="nama_tugas" class="form-control">
 		</div>
 		<div>
 			<label>Deskripsi Tugas</label>
-			<textarea name="deskripsi"> </textarea>
+			<textarea name="deskripsi" class="form-control"> </textarea>
 		</div>
 		<div>
 			<label>File Tugas</label>
-			<input type="file" name="file_tugas">
+			<input type="file" name="file_tugas" class="form-control">
 		</div>
 		<div>
 			<label>Deadline Tugas</label>
-			<input type="date" name="deadline">
+			<input type="date" name="deadline" class="form-control">
 		</div>
 		<button type="submit" class="btn btn-primary">Simpan</button>
 		

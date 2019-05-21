@@ -40,7 +40,7 @@
 				</div>
           		<form action="{{ url('/kelas/post/' .$kelas->id) }}" method="post">
           			{{ csrf_field() }}
-          			<input type="text" class="form-control" name="isi">
+          			<input type="text" class="form-control" name="deskripsi">
           			<input type="hidden" value="{{$kelas->id}}" name="kelas_id">
           			<div class="form-group">
           				<input type="hidden" value="{{Auth::user()->id}}" name="user_id">
@@ -54,40 +54,25 @@
             <!-- timeline time label -->
 	            <!-- /.timeline-label -->
 	            <!-- timeline item -->
-	            @foreach($post as $post)
-	            <li>
-	              <i class="fa fa-envelope bg-blue"></i>
-
-	              <div class="timeline-item">
-	                <span class="time"><i class="fa fa-clock-o"></i>{{$post -> created_at}}</span>
-
-	                <h3 class="timeline-header"><a href="#">{{$post->user->name}}</a>&nbsp; write a new post</h3>
-
-	                <div class="timeline-body">
-	                	{{$post->isi}}
-	                </div>
-	                <div class="timeline-footer">
-	                  <a class="btn btn-primary btn-xs">Read more</a>
-	                  <a class="btn btn-danger btn-xs">Delete</a>
-	                </div>
-	              </div>
-	            </li>
-	            @endforeach
 	            @foreach($tugases as $tugas)
 	            <li>
 	              <i class="fa fa-envelope bg-blue"></i>
 
 	              <div class="timeline-item">
 	                <span class="time"><i class="fa fa-clock-o"></i>{{$tugas -> created_at}}</span>
-
-	                <h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added a new assignment </h3>
-
+	                @if ($tugas->nama_tugas != null)
+	                <h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added a assignment </h3>
+	                @else 
+	                <h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added a post</h3>
+	                @endif
 	                <div class="timeline-body">
-	                	<a href="/file/{{$tugas->file_tugas}}">{{$tugas->nama_tugas}}</a>
-	                </div>
-	                <div class="timeline-footer">
-	                  <a class="btn btn-primary btn-xs">Read more</a>
-	                  <a class="btn btn-danger btn-xs">Delete</a>
+	                	{{$tugas->nama_tugas}}<br>
+	                	{{$tugas->deskripsi}}<br>
+	                	<img src="">
+	                	<a href="/file/{{$tugas->file_tugas}}" src="/file/{{$tugas->file_tugas}}">{{$tugas->file_tugas}}</a><br>
+	                	@if ($tugas->nama_tugas != null)
+	                	<p class="btn btn-danger btn-sm">{{$tugas->deadline}}</p>
+	                	@endif
 	                </div>
 	              </div>
 	            </li>
@@ -110,6 +95,7 @@
 			</tr>
 			@foreach ($tugases as $tugas)
 			<tr>
+		@if ($tugas->nama_tugas != null)
 		@if ($kelas->id == $tugas->kelas_id)
 		<td>{{$tugas->nama_tugas}}</td>
 		<td>{{$tugas->deskripsi}}</td>
@@ -119,6 +105,7 @@
 			<a href="/file/{{$tugas->file_tugas}}" class="btn btn-primary btn-sm col-md-5">Download</a>
 			<a href="/tugas/upload/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5">Upload</a>
 		</td>
+		@endif
 		@endif
 		</tr>
 		@endforeach

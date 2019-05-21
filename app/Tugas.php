@@ -10,9 +10,9 @@ class Tugas extends Model
     	return $this->belongsTo('App\Kelas');
     }
 
-    // public function user(){
-    // 	return $this->hasMany('App\User');
-    // }
+    public function user(){
+    	return $this->hasMany('App\User');
+    }
     // public function murid(){
     // 	return $this->hasMany('App\Murid');
     // }

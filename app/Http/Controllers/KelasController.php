@@ -8,6 +8,7 @@ use App\User;
 use App\Tugas;
 use App\Murid;
 use App\post;
+
 class KelasController extends Controller
 {
     public function index()
@@ -21,7 +22,7 @@ class KelasController extends Controller
     public function lihat($id)
     {
         // 
-        $tugases = Tugas::all();
+        $tugases = Tugas::orderBy('created_at','desc')->get()->all();
         $murid = Murid::all();
         $post = post::all();
         $kelass = Kelas::all();
@@ -61,15 +62,15 @@ class KelasController extends Controller
         //
     }
     public function post( Request $request){
-        $post = new post();
-        $request->validate([
-            'user_id' => 'required',
-            'kelas_id' => 'required',
-            'isi' => 'required'
-        ]);
+        $post = new Tugas();
+        // $request->validate([
+        //     'user_id' => 'required',
+        //     'kelas_id' => 'required',
+        //     'deskripsi' => 'required'
+        // ]);
         $post->user_id=$request->user_id;
         $post->kelas_id=$request->kelas_id;
-        $post->isi=$request->isi;
+        $post->deskripsi=$request->deskripsi;
         $post->save();
         return redirect('kelas/lihat/' .$request->kelas_id);
     }

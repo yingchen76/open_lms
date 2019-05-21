@@ -54,6 +54,18 @@
             <!-- timeline time label -->
 	            <!-- /.timeline-label -->
 	            <!-- timeline item -->
+	            @foreach($murid as $murid)
+	            <li>
+	              <i class="fa fa-envelope bg-blue"></i>
+
+	            <div class="timeline-item">
+	                <span class="time"><i class="fa fa-clock-o"></i>{{$murid -> created_at}}</span>
+	                @if ($murid->kelas_id === $kelas->id)
+	                <h3 class="timeline-header"><a href="#">{{$murid->kelas->user->name}}</a>&nbsp; added {{$murid->user->name}}</h3>
+	                @endif
+	            </div>
+	            </li>
+	            @endforeach
 	            @foreach($tugases as $tugas)
 	            <li>
 	              <i class="fa fa-envelope bg-blue"></i>
@@ -135,17 +147,13 @@
 		    <br>
 			<table class="table table-striped col-md-12">
 				<tr>
-					<th>Nama Kelas</th>
 					<th>Nama Murid</th>
 				</tr>
-				@foreach ($murid as $mk)
-				@if ($mk->kelas_id == $kelas->id)
 				<tr>
-					<td>{{$mk->kelas->nama_kelas}}</td>
-					<td>{{$mk->user->name}}</td>
+					@if ($murid->kelas_id === $kelas->id)
+					<td>{{$murid->user->name}}</td>
+	                @endif
 				</tr>
-				@endif
-				@endforeach
 			</table>
 		</div>
 	</div>

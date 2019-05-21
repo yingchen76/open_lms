@@ -31,7 +31,7 @@
 				</tr>
 				<tr>
 					<td>Foto</td>
-					<td><img src="/user_picture/{{ Auth::user()->profile_picture }}" style="height: 190px;"></td>
+					<td><img src="/user_picture/{{ Auth::user()->profile_picture }}" style="width:500px;height:600px;"></td>
 				</tr>
 				<tr>
 					<td>Telepon</td>

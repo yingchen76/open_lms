@@ -54,7 +54,7 @@ class KelasController extends Controller
         $kelas->jenis_kelas = $request->jenis_kelas;
 
         $kelas->save();
-        return redirect('kelas');
+        return redirect('kelas/lihat');
     }
 
     public function show($id)

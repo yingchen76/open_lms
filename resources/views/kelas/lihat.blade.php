@@ -90,6 +90,7 @@
 	            @endforeach
 
         	</ul>
+        	
         	<ul class="timeline col-md-3">
             <!-- timeline time label -->
 	            <!-- /.timeline-label -->
@@ -105,7 +106,7 @@
 				                	<h3 class="timeline-header"><a href="#">You</a>&nbsp; added {{$murid->user->name}}</h3>
 				                	@else 
 				                	 	@if($murid->user->name != Auth::user()->name)
-						               	<h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added {{$murid->user->name}}</h3>
+						               	<h3 class="timeline-header"><a href="#">{{$murid->kelas->user->name}}</a>&nbsp; added {{$murid->user->name}}</h3>
 						               	@else 
 						               	<h3 class="timeline-header"><a href="#">{{$murid->kelas->user->name}}</a>&nbsp; added you</h3>
 						               	@endif
@@ -155,6 +156,7 @@
 					<div class="col-md-8">
 						<div class="card">
 							<div class="card-body">
+								@if($kelas->user->id == Auth::user()->id)
 								<form action="{{url('/murid/new/'.$kelas->id)}}" method="post">
 									{{csrf_field()}}
 										<input type="hidden" name="kelas_id" class="form-control" value="{{$kelas->id}}">
@@ -165,13 +167,18 @@
 									</div>
 									<button type="submit" class="btn btn-primary">Simpan</button>
 								</form>
+								@endif
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		    <br>
+			<label>&nbsp; &nbsp; &nbsp;Daftar Murid</label>
 			
+			@if($murid->kelas_id == $kelas->id)
+				{{$murid->user->name}}
+			@endif
 		</div>
 	</div>
 </div>

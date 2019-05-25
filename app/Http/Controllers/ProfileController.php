@@ -64,6 +64,11 @@ class ProfileController extends Controller
         $user= User::find($id);
         return view('profile.edit', compact('user'));
     }
+    public function editakun($id)
+    {
+        $user = User::find($id);
+        return view('Profile.editakun', compact('user'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -75,32 +80,38 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'profile_picture' => 'required',
-            'telepon' => 'required',
-            'deskripsi' => 'required',
-            'lokasi' => 'required'            
-        ]);
+        if($request->hasFile('profile_picture')){
+            if ($request->file('profile_picture') != null){
+                $tempat_upload = public_path('/user_picture');
+                $file = $request->file('profile_picture');
+                $ext = $file->getClientOriginalExtension();
+                $namafile= $file->getClientOriginalName();
+                $filename = $namafile;
+                $file->move($tempat_upload, $filename);
+                $user->profile_picture = $filename;
+            }
+        }
 
-        $tempat_upload = public_path('/usser_picture');
-        $file = $request->file('profile_picture');
-        $ext = $file->getClientOriginalExtension();
-        $namafile= $file->getClientOriginalName();
-        $filename = $namafile . "." . $ext;
-        
-        $kodepassword = $request->password;
         $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password); 
-        $user->profile_picture = $filename;
+        $user->nickname = $request->nickname;
         $user->telepon = $request->telepon;
         $user->deskripsi = $request->deskripsi;
         $user->lokasi = $request->lokasi;
         $user->save();
         return redirect('/profile');
+    }
+    public function updateakun(Request $request, $id)
+    {
+        $user = User::find($id);
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect('/profile');
+
     }
 
     /**

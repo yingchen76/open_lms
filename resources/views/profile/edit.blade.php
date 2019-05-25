@@ -14,20 +14,12 @@
     <form action="{{ url('/profile/edit/' . Auth::user()->id) }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
-            <label>Nama Kelas</label>
+            <label>Nama</label>
             <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}" >
         </div>
-         <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" >
-        </div>
-         <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" name="password">
-        </div>
-         <div class="form-group">
-            <label>Retype Password</label>
-             <input type="password" class="form-control" name="password_confirmation">
+        <div class="form-group">
+            <label>Nickname</label>
+            <input type="text" name="nickname" class="form-control" value="{{ Auth::user()->nickname }}" >
         </div>
          <div class="form-group">
             <label>Foto</label>

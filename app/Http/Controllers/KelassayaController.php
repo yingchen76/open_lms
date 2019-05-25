@@ -7,6 +7,7 @@ use App\post;
 use App\Kelas;
 use App\User;
 use App\Murid;
+use App\Tugas;
 class KelassayaController extends Controller
 {
     /**
@@ -18,6 +19,17 @@ class KelassayaController extends Controller
     {
         $murid = Murid::all();
         return view ('kelassaya.lihat', compact('murid'));
+    }
+
+    public function lihat($id)
+    {
+        // 
+        $tugases = Tugas::orderBy('created_at','desc')->get()->all();
+        $murid = Murid::all();
+        $post = post::all();
+        $kelass = Kelas::all();
+        $kelas = Kelas::find($id);
+        return view('kelas.lihat', compact('kelas','kelass', 'tugases', 'murid', 'post')); 
     }
 
     /**

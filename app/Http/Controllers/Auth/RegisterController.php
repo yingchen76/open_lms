@@ -65,13 +65,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $request = request();
-            
+            if ($request->file('profile_picture') != null){
                 $tempat_upload = public_path('/user_picture');
                 $file = $request->file('profile_picture');
                 $ext = $file->getClientOriginalExtension();
                 $namafile= $file->getClientOriginalName();
-                $filename = $namafile . "." . $ext;
+                $filename = $namafile;
                 $file->move($tempat_upload, $filename);
+            }
+            
                 // return $file;   
           return User::create([
             'name' => $data['name'],

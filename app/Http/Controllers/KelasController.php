@@ -27,7 +27,7 @@ class KelasController extends Controller
         $post = post::all();
         $kelass = Kelas::all();
         $kelas = Kelas::find($id);
-        return view('kelas.lihat', compact('kelas','kelass', 'tugases', 'murid', 'post')); 
+        return view('kelas/lihat', compact('kelas','kelass', 'tugases', 'murid', 'post')); 
     }
     
     public function create()
@@ -54,7 +54,7 @@ class KelasController extends Controller
         $kelas->jenis_kelas = $request->jenis_kelas;
 
         $kelas->save();
-        return redirect('kelas/lihat');
+        return redirect('kelas');
     }
 
     public function show($id)

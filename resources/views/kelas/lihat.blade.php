@@ -50,53 +50,79 @@
           	</div>
           	<br>
 
-          	<ul class="timeline">
+          	
+		    <ul class="timeline col-md-9">
+	            @foreach($tugases as $tugas)
+	            @if($tugas->kelas_id == $kelas->id)
+	            <li>
+	             @if ($tugas->nama_tugas != null)
+	              	<i class="fa fa-reorder bg-blue"></i>
+	             @else
+	             	<i class="fa fa-comment-o bg-blue"></i>
+	             @endif 
+		              <div class="timeline-item">
+		                <span class="time"><i class="fa fa-clock-o"></i>{{$tugas -> created_at}}</span>
+		                @if ($tugas->nama_tugas != null)
+		                	@if($tugas->kelas->user->name == Auth::user()->name)
+		                	<h3 class="timeline-header"><a href="#">You</a>&nbsp; added a assignment </h3>
+		                	@else 
+		                	<h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added a assignment </h3>
+		                	@endif
+		                @else 
+			                @if($tugas->kelas->user->name == Auth::user()->name)
+			               	<h3 class="timeline-header"><a href="#">You</a>&nbsp; added a post </h3>
+			               	@else 
+			               	<h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added a post </h3>
+			               	@endif
+		                @endif
+		                <div class="timeline-body">
+		                	{{$tugas->nama_tugas}}<br>
+		                	{{$tugas->deskripsi}}<br>
+		                	<img src="">
+		                	<a href="/file/{{$tugas->file_tugas}}" src="/file/{{$tugas->file_tugas}}">{{$tugas->file_tugas}}</a><br>
+		                	@if ($tugas->nama_tugas != null)
+		                	<p class="btn btn-danger btn-sm">{{$tugas->deadline}}</p>
+		                	@endif
+		                </div>
+		              </div>
+	            </li>
+	            @endif
+	            @endforeach
+
+        	</ul>
+        	<ul class="timeline col-md-3">
             <!-- timeline time label -->
 	            <!-- /.timeline-label -->
 	            <!-- timeline item -->
 	            @foreach($murid as $murid)
-	            <li>
-	              <i class="fa fa-envelope bg-blue"></i>
-
-	            <div class="timeline-item">
-	                <span class="time"><i class="fa fa-clock-o"></i>{{$murid -> created_at}}</span>
-	                @if ($murid->kelas_id === $kelas->id)
-	                <h3 class="timeline-header"><a href="#">{{$murid->kelas->user->name}}</a>&nbsp; added {{$murid->user->name}}</h3>
-	                @endif
-	            </div>
-	            </li>
-	            @endforeach
-	            @foreach($tugases as $tugas)
-	            <li>
-	              <i class="fa fa-envelope bg-blue"></i>
-
-	              <div class="timeline-item">
-	                <span class="time"><i class="fa fa-clock-o"></i>{{$tugas -> created_at}}</span>
-	                @if ($tugas->nama_tugas != null)
-	                <h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added a assignment </h3>
-	                @else 
-	                <h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added a post</h3>
-	                @endif
-	                <div class="timeline-body">
-	                	{{$tugas->nama_tugas}}<br>
-	                	{{$tugas->deskripsi}}<br>
-	                	<img src="">
-	                	<a href="/file/{{$tugas->file_tugas}}" src="/file/{{$tugas->file_tugas}}">{{$tugas->file_tugas}}</a><br>
-	                	@if ($tugas->nama_tugas != null)
-	                	<p class="btn btn-danger btn-sm">{{$tugas->deadline}}</p>
-	                	@endif
-	                </div>
-	              </div>
-	            </li>
-	            @endforeach
-        	</ul>
+	            @if($murid->kelas_id == $kelas->id)
+			        <li>
+			            <i class="fa fa-user-o bg-blue"></i>
+					         <div class="timeline-item">
+				                <span class="time"><i class="fa fa-clock-o"></i>{{$murid -> created_at}}</span>
+				                @if ($murid->kelas_id == $kelas->id)
+						            @if($tugas->kelas->user->name == Auth::user()->name)
+				                	<h3 class="timeline-header"><a href="#">You</a>&nbsp; added {{$murid->user->name}}</h3>
+				                	@else 
+				                	 	@if($murid->user->name != Auth::user()->name)
+						               	<h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added {{$murid->user->name}}</h3>
+						               	@else 
+						               	<h3 class="timeline-header"><a href="#">{{$murid->kelas->user->name}}</a>&nbsp; added you</h3>
+						               	@endif
+						            @endif
+				               	@endif
+				            </div>
+			   		</li>
+			   	@endif	
+		        @endforeach
+		    </ul>
 </div>
 		<div class="tab-pane" id="two" role="tabpanel" aria-labelledby="two-tab">
           	<br>
-       	<a href="/tugas/index/{{$kelas->id}}" class="btn btn-primary">Tambah Tugas</a>
+       		<a href="/tugas/index/{{$kelas->id}}" class="btn btn-primary">Tambah Tugas</a>
           		<form action="{{ url('/tugas/lihat/' . $kelas->id) }}" method="post">
-		{{ csrf_field() }}
-		<table class="table table-striped col-md-12">
+				{{ csrf_field() }}
+					<table class="table table-striped col-md-12">
 						<tr>
 							<th>Nama Tugas</th>
 							<th>Deskripsi</th>
@@ -104,26 +130,25 @@
 							<th>Deadline</th>
 							<th>Action</th>
 						</tr>
-			</tr>
-			@foreach ($tugases as $tugas)
-			<tr>
-		@if ($tugas->nama_tugas != null)
-		@if ($kelas->id == $tugas->kelas_id)
-		<td>{{$tugas->nama_tugas}}</td>
-		<td>{{$tugas->deskripsi}}</td>
-		<td>{{$tugas->file_tugas}}</td>
-		<td>{{$tugas->deadline}}</td>
-		<td>
-			<a href="/file/{{$tugas->file_tugas}}" class="btn btn-primary btn-sm col-md-5">Download</a>
-			<a href="/tugas/upload/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5">Upload</a>
-		</td>
-		@endif
-		@endif
-		</tr>
-		@endforeach
-</table>
-	</form>   
-</div>
+						<tr>
+							@foreach ($tugases as $tugas)
+								@if ($tugas->nama_tugas != null)
+									@if ($kelas->id == $tugas->kelas_id)
+										<td>{{$tugas->nama_tugas}}</td>
+										<td>{{$tugas->deskripsi}}</td>
+										<td>{{$tugas->file_tugas}}</td>
+										<td>{{$tugas->deadline}}</td>
+										<td>
+											<a href="/file/{{$tugas->file_tugas}}" class="btn btn-primary btn-sm col-md-5">Download</a>
+											<a href="/tugas/upload/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5">Upload</a>
+										</td>
+									@endif
+								@endif
+							@endforeach
+						</tr>
+					</table>
+				</form>   
+		</div>
 		<div class="tab-pane" id="three" role="tabpanel" aria-labelledby="three-tab">
 			<div class="container">
 				<div class="row justify-content-center">
@@ -134,6 +159,7 @@
 									{{csrf_field()}}
 										<input type="hidden" name="kelas_id" class="form-control" value="{{$kelas->id}}">
 									<div class="form-group">
+										<br>
 										<label>Email Murid :</label>
 										<input type="text" name="email" class="form-control">
 									</div>
@@ -145,16 +171,7 @@
 				</div>
 			</div>
 		    <br>
-			<table class="table table-striped col-md-12">
-				<tr>
-					<th>Nama Murid</th>
-				</tr>
-				<tr>
-					@if ($murid->kelas_id === $kelas->id)
-					<td>{{$murid->user->name}}</td>
-	                @endif
-				</tr>
-			</table>
+			
 		</div>
 	</div>
 </div>

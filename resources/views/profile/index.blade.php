@@ -16,6 +16,7 @@
 	
 </div>
 <a href="profile/edit/{{ Auth::user()->id }}" class="btn btn-primary">Edit Profile</a>
+<a href="profile/editakun/{{ Auth::user()->id }}" class="btn btn-primary">Edit Akun</a>
 			<table class="table table-bordered">
 				<tr>
 					<td>Nama Lengkap</td>
@@ -31,7 +32,7 @@
 				</tr>
 				<tr>
 					<td>Foto</td>
-					<td><img src="/user_picture/{{ Auth::user()->profile_picture }}" style="width:500px;height:600px;"></td>
+					<td><img src="/user_picture/{{ Auth::user()->profile_picture }}"></td>
 				</tr>
 				<tr>
 					<td>Telepon</td>

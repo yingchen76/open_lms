@@ -21,7 +21,7 @@
 						
 						<tr>
 							@foreach($kelas as $kelas)
-							@if ($kelas->user->name == Auth::user()->name )
+							@if ($kelas->user->name == Auth::user()->name)
 							<td>{{ $kelas->nama_kelas }}</td>
 							<td>{{ $kelas->jenis_kelas }}</td>
 							<td>{{ $kelas->user->name }}</td>
@@ -36,31 +36,6 @@
 						</tr>
 					</table>
           </div>
-
-<script type="text/javascript">
-    $(".remove").click(function(){
-        var id = $(this).parents("tr").attr("id");
-
-
-        if(confirm('Are you sure to remove this record ?'))
-        {
-            $.ajax({
-               url: '/kelas/delete/{{$kelas->id}',
-               type: 'delete',
-               data: {id: id},
-               error: function() {
-                  alert('Something is wrong');
-               },
-               success: function(data) {
-                    $("#"+id).remove();
-                    alert("Record removed successfully");  
-               }
-            });
-        }
-    });
-
-
-</script>
 @stop
 		
       <!-- END CUSTOM TABS -->

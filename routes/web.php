@@ -49,6 +49,8 @@ Route::get('/profile',['middleware' => 'auth', 'uses' => 'ProfileController@inde
 Route::get('/profile/edit/{id}',['middleware' => 'auth', 'uses' => 'ProfileController@edit']);
 Route::post('/profile/edit/{id}',['middleware' => 'auth', 'uses' => 'ProfileController@update']);
 
+Route::get('/kelassaya', ['middleware' => 'auth', 'uses' => 'KelassayaController@index']);
+Route::get('/kelassaya/lihat/{id}', ['middleware' => 'auth', 'uses' => 'KelassayaController@lihat']);
+
 
 Route::get('/home', 'HomeController@index')->name('home');
-

@@ -42,7 +42,7 @@ class UploadController extends Controller
     {
         //
         //$user= User::all();
-        $kelas= Tugas::find($id);
+        $tugas= Tugas::find($id);
         $tugas = new Upload();
         $request->validate([
             'tugas_id'=> 'required',
@@ -52,15 +52,15 @@ class UploadController extends Controller
         $file = $request->file('file_tugas');
         $ext = $file->getClientOriginalExtension();
         $namafile= $file->getClientOriginalName();
-        $filename = $namafile . "." . $ext;
+        $filename = $namafile;
         $file->move($tempat_upload, $filename);
         
 
-        $tugas->tugas_id = $request->id_tugas; 
-        $tugas->user_id = $request->id_user;
+        $tugas->tugas_id = $request->tugas_id; 
+        $tugas->user_id = $request->user_id;
         $tugas->file_tugas = $filename;
         $tugas->save();
-        return redirect('/kelas');
+        return redirect('/kelassaya');
     }
 
     /**

@@ -16,8 +16,8 @@
 	<form action="{{ url('/tugas/upload/' . $tugas->id) }}" method="post" enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<div>
-			<input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
-			<input type="hidden" name="id_tugas" value="{{ $tugas->id }}">
+			<input type="hidden" name="tugas_id" value="{{ Auth::user()->id }}">
+			<input type="hidden" name="user_id" value="{{ $tugas->id }}">
 		</div>
 		<div>
 			<input type="file" name="file_tugas">

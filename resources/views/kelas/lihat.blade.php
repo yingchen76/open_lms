@@ -88,9 +88,8 @@
 	            </li>
 	            @endif
 	            @endforeach
-
         	</ul>
-        	
+
         	<ul class="timeline col-md-3">
             <!-- timeline time label -->
 	            <!-- /.timeline-label -->
@@ -102,7 +101,7 @@
 					         <div class="timeline-item">
 				                <span class="time"><i class="fa fa-clock-o"></i>{{$murid -> created_at}}</span>
 				                @if ($murid->kelas_id == $kelas->id)
-						            @if($tugas->kelas->user->name == Auth::user()->name)
+						            @if($murid->kelas->user->name == Auth::user()->name)
 				                	<h3 class="timeline-header"><a href="#">You</a>&nbsp; added {{$murid->user->name}}</h3>
 				                	@else 
 				                	 	@if($murid->user->name != Auth::user()->name)
@@ -120,7 +119,9 @@
 </div>
 		<div class="tab-pane" id="two" role="tabpanel" aria-labelledby="two-tab">
           	<br>
+          	@if($kelas->user_id == Auth::user()->id)
        		<a href="/tugas/index/{{$kelas->id}}" class="btn btn-primary">Tambah Tugas</a>
+       		@endif
           		<form action="{{ url('/tugas/lihat/' . $kelas->id) }}" method="post">
 				{{ csrf_field() }}
 					<table class="table table-striped col-md-12">
@@ -177,7 +178,7 @@
 			<label>&nbsp; &nbsp; &nbsp;Daftar Murid</label>
 			
 			@if($murid->kelas_id == $kelas->id)
-				{{$murid->user->name}}
+				<br>&nbsp; &nbsp; &nbsp;{{$murid->user->name}}
 			@endif
 		</div>
 	</div>

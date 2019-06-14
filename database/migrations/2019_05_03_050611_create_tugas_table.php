@@ -15,12 +15,12 @@ class CreateTugasTable extends Migration
     {
         Schema::create('tugas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->integer('kelas_id');
-            $table->String('nama_tugas');
-            $table->String('deskripsi');
-            $table->String('file_tugas');
-            $table->date('deadline');
+            $table->integer('user_id')->nullable();
+            $table->integer('kelas_id')->nullable();
+            $table->String('nama_tugas')->nullable();
+            $table->String('deskripsi')->nullable();
+            $table->String('file_tugas')->nullable();
+            $table->date('deadline')->nullable();
             $table->timestamps();
         });
     }

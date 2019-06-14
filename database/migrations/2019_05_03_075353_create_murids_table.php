@@ -19,6 +19,12 @@ class CreateMuridsTable extends Migration
             $table->integer('user_id'); 
             $table->timestamps();
         });
+
+        DB::table('murids')->insert([
+                'id' => '1',
+                'kelas_id' => '99999999',
+                'user_id' => '99999999'
+            ]);
     }
 
     /**

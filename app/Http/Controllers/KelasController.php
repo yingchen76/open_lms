@@ -7,7 +7,6 @@ use App\Kelas;
 use App\User;
 use App\Tugas;
 use App\Murid;
-use App\post;
 
 class KelasController extends Controller
 {
@@ -24,10 +23,9 @@ class KelasController extends Controller
         // 
         $tugases = Tugas::orderBy('created_at','desc')->get()->all();
         $murid = Murid::all();
-        $post = post::all();
         $kelass = Kelas::all();
         $kelas = Kelas::find($id);
-        return view('kelas/lihat', compact('kelas','kelass', 'tugases', 'murid', 'post')); 
+        return view('kelas/lihat', compact('murids','kelas','kelass', 'tugases', 'murid', 'post')); 
     }
     
     public function create()
@@ -56,24 +54,28 @@ class KelasController extends Controller
         $kelas->save();
         return redirect('kelas');
     }
+    public function post( Request $request){
+        $post = new Tugas();
+        $request->validate([
+            'user_id' => 'required',
+            'kelas_id' => 'required',
+            'deskripsi' => 'required'
+        ]);
+        $post->user_id=$request->user_id;
+        $post->kelas_id=$request->kelas_id;
+        $post->deskripsi=$request->deskripsi;
+        // return $request->deskripsi;
+        $post->save();
+
+        return redirect('kelas/lihat/' .$request->kelas_id);
+    }
+
 
     public function show($id)
     {
         //
     }
-    public function post( Request $request){
-        $post = new Tugas();
-        // $request->validate([
-        //     'user_id' => 'required',
-        //     'kelas_id' => 'required',
-        //     'deskripsi' => 'required'
-        // ]);
-        $post->user_id=$request->user_id;
-        $post->kelas_id=$request->kelas_id;
-        $post->deskripsi=$request->deskripsi;
-        $post->save();
-        return redirect('kelas/lihat/' .$request->kelas_id);
-    }
+   
 
     public function edit($id)
     {
@@ -106,9 +108,7 @@ class KelasController extends Controller
         $kelas = Kelas::find($id);
         $kelas->delete();
         $murid = Murid::where('kelas_id',$id);   
-        $murid->delete();  
-        $post = post::where('kelas_id',$id);
-        $post->delete();  
+        $murid->delete();   
         $tugas = Tugas::where('kelas_id',$id);
         $tugas->delete();  
         // return $murid;

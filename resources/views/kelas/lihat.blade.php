@@ -176,10 +176,9 @@
 			</div>
 		    <br>
 			<label>&nbsp; &nbsp; &nbsp;Daftar Murid</label>
-			
-			@if($murid->kelas_id == $kelas->id)
+				@if ($murid->kelas_id == $kelas->id)
 				<br>&nbsp; &nbsp; &nbsp;{{$murid->user->name}}
-			@endif
+				@endif
 		</div>
 	</div>
 </div>

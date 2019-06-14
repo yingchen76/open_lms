@@ -26,7 +26,6 @@ class KelassayaController extends Controller
         // 
         $tugases = Tugas::orderBy('created_at','desc')->get()->all();
         $murid = Murid::all();
-        $post = post::all();
         $kelass = Kelas::all();
         $kelas = Kelas::find($id);
         return view('kelas.lihat', compact('kelas','kelass', 'tugases', 'murid', 'post')); 

@@ -104,14 +104,14 @@ class KelasController extends Controller
         //
 
         $kelas = Kelas::find($id);
-        $murid = Murid::where('kelas_id',$id)->get();   
-        $post = post::where('kelas_id',$id)->get();   
-        $tugas = Tugas::where('kelas_id',$id)->get();   
-        // $kelas->delete();
-        // $murid->delete();  
-        // $post->delete();  
-        // $tugas->delete();  
-        return $murid;
-        // return redirect('kelas');
+        $kelas->delete();
+        $murid = Murid::where('kelas_id',$id);   
+        $murid->delete();  
+        $post = post::where('kelas_id',$id);
+        $post->delete();  
+        $tugas = Tugas::where('kelas_id',$id);
+        $tugas->delete();  
+        // return $murid;
+        return redirect('kelas');
     }
 }

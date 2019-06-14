@@ -50,7 +50,7 @@
           	</div>
           	<br>
 
-          	
+          	<div class="col-md-12">
 		    <ul class="timeline col-md-9">
 	            @foreach($tugases as $tugas)
 	            @if($tugas->kelas_id == $kelas->id)
@@ -89,8 +89,7 @@
 	            @endif
 	            @endforeach
         	</ul>
-
-        	<ul class="timeline col-md-3">
+        	<ul class="timeline col-md-3 box-body">
             <!-- timeline time label -->
 	            <!-- /.timeline-label -->
 	            <!-- timeline item -->
@@ -116,6 +115,7 @@
 			   	@endif	
 		        @endforeach
 		    </ul>
+		   </div>`
 </div>
 		<div class="tab-pane" id="two" role="tabpanel" aria-labelledby="two-tab">
           	<br>

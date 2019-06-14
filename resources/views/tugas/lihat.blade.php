@@ -21,18 +21,18 @@
 			</tr>
 			@foreach ($tugas as $tugas)
 			<tr>
-		@if ($kelas->id == $tugas->kelas_id)
-		<td>{{$tugas->nama_tugas}}</td>
-		<td>{{$tugas->deskripsi}}</td>
-		<td>{{$tugas->file_tugas}}</td>
-		<td>{{$tugas->deadline}}</td>
-		<td>
-			<a href="/file/{{$tugas->file_tugas}}" class="btn btn-primary btn-sm col-md-5">Download</a>
-			<a href="/tugas/upload/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5">Upload</a>
-		</td>
-		@endif
-		</tr>
-		@endforeach
+				@if ($kelas->id == $tugas->kelas_id)
+				<td>{{$tugas->nama_tugas}}</td>
+				<td>{{$tugas->deskripsi}}</td>
+				<td>{{$tugas->file_tugas}}</td>
+				<td>{{$tugas->deadline}}</td>
+				<td>
+					<a href="/file/{{$tugas->file_tugas}}" class="btn btn-primary btn-sm col-md-5">Download</a>
+					<a href="/tugas/upload/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5">Upload</a>
+				</td>
+				@endif
+			</tr>
+			@endforeach
 </table>
 	</form>
 

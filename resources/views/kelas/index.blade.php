@@ -18,10 +18,10 @@
 							<th>Nama Guru</th>
 							<th>Action</th>
 						</tr>
-						
-						<tr>
-							@foreach($kelas as $kelas)
+						@foreach($kelas as $kelas)
 							@if ($kelas->user->name == Auth::user()->name)
+						<tr>
+							
 							<td>{{ $kelas->nama_kelas }}</td>
 							<td>{{ $kelas->jenis_kelas }}</td>
 							<td>{{ $kelas->user->name }}</td>
@@ -29,13 +29,18 @@
 								
 								<a href="/kelas/edit/{{$kelas->id}}" class="btn btn-primary btn-sm col-md-2">Edit</a>
 								<a href="/kelas/lihat/{{$kelas->id}}" class="btn btn-primary btn-sm col-md-2">View</a>
-								<button class="btn btn-danger btn-sm remove">Delete</button>
+								<form class="delete" action="/kelas/delete/{{$kelas->id}}" method="POST">
+							        {{ csrf_field() }}
+							        {{method_field('DELETE')}}
+									<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('are you sure?')">Delete</button>
+							    </form>
 							</td>
+						</tr>
 							@endif
 							@endforeach
-						</tr>
 					</table>
           </div>
+          
 @stop
 		
       <!-- END CUSTOM TABS -->

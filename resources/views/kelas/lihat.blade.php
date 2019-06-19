@@ -8,6 +8,7 @@
 
 
 @section('content')
+
 <div class="container">
   <div class="row">
     <div class="col-6">
@@ -23,11 +24,15 @@
             <li class="nav-item">
                 <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="false">Murid</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="false">Info</a>
+            </li>
           </ul>
         </div>
     </div>
 </div>
 </div>
+
 
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane active" id="one" role="tabpanel" aria-labelledby="one-tab">
@@ -64,24 +69,27 @@
 		                <span class="time"><i class="fa fa-clock-o"></i>{{$tugas -> created_at}}</span>
 		                @if ($tugas->nama_tugas != null)
 		                	@if($tugas->kelas->user->name == Auth::user()->name)
-		                	<h3 class="timeline-header"><a href="#">You</a>&nbsp; added a assignment </h3>
+		                	<h3 class="timeline-header">You&nbsp; added a assignment </h3>
 		                	@else 
-		                	<h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added a assignment </h3>
+		                	<h3 class="timeline-header"><a href="/profile/lihat/{{$tugas->kelas->user->id}}">{{$tugas->kelas->user->name}}</a>&nbsp; added a assignment </h3>
 		                	@endif
 		                @else 
 			                @if($tugas->kelas->user->name == Auth::user()->name)
-			               	<h3 class="timeline-header"><a href="#">You</a>&nbsp; added a post </h3>
+			               	<h3 class="timeline-header">You&nbsp; added a post </h3>
 			               	@else 
-			               	<h3 class="timeline-header"><a href="#">{{$tugas->kelas->user->name}}</a>&nbsp; added a post </h3>
+			               	<h3 class="timeline-header"><a href="/profile/lihat/{{$tugas->kelas->user->id}}">{{$tugas->kelas->user->name}}</a>&nbsp; added a post </h3>
 			               	@endif
 		                @endif
-		                <div class="timeline-body">
+		                <div class="timeline-body" style="padding-bottom: 50px;">
 		                	{{$tugas->nama_tugas}}<br>
 		                	{{$tugas->deskripsi}}<br>
 		                	<img src="">
 		                	<a href="/file/{{$tugas->file_tugas}}" src="/file/{{$tugas->file_tugas}}">{{$tugas->file_tugas}}</a><br>
 		                	@if ($tugas->nama_tugas != null)
-		                	<p class="btn btn-danger btn-sm">{{$tugas->deadline}}</p>
+		                	<p class="btn btn-danger col-md-2" style="margin-top: 10px;">{{$tugas->deadline}}</p>
+		                	<div class="container-box rotated col-md-3" style="margin-top: 10px;">						
+								<button type="button" class="btn btn-primary col-md-5" data-toggle="modal" data-target="#myModal">Upload</button>				
+							</div>
 		                	@endif
 		                </div>
 		              </div>
@@ -132,8 +140,9 @@
 							<th>Deadline</th>
 							<th>Action</th>
 						</tr>
+						@foreach ($tugases as $tugas)
 						<tr>
-							@foreach ($tugases as $tugas)
+							
 								@if ($tugas->nama_tugas != null)
 									@if ($kelas->id == $tugas->kelas_id)
 										<td>{{$tugas->nama_tugas}}</td>
@@ -142,7 +151,10 @@
 										<td>{{$tugas->deadline}}</td>
 										<td>
 											<a href="/file/{{$tugas->file_tugas}}" class="btn btn-primary btn-sm col-md-5">Download</a>
-											<a href="/tugas/upload/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5">Upload</a>
+											<div class="container-box rotated">						
+												<button type="button" href="/tugas/lihat/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5" data-toggle="modal" data-target="#myModal">Upload</button>				
+											</div>
+											<a href="/tugas/daftar/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5">Lihat Dokumen</a>
 										</td>
 									@endif
 								@endif
@@ -176,12 +188,64 @@
 			</div>
 		    <br>
 			<label>&nbsp; &nbsp; &nbsp;Daftar Murid</label>
-				@if ($murid->kelas_id == $kelas->id)
-				<br>&nbsp; &nbsp; &nbsp;{{$murid->user->name}}
-				@endif
+					<table class="table table-striped">
+						<tr>
+							<th>Murid</th>
+							<th>Email</th>
+							
+						</tr>
+						@foreach ($murid as $murid)
+							@if ($murid->kelas_id == $kelas->id)
+						<tr>
+							
+							<td><img src="/user_picture/{{$murid->user->profile_picture}}" height="150">{{$murid->user->name}}</td>
+							<td>{{$murid->user->email}} </td>
+							
+						</tr>
+							@endif
+							@endforeach
+					</table>
+		</div>
+		<div class="tab-pane" id="four" role="tabpanel" aria-labelledby="four-tab">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-8">
+						<div class="card">
+							<div class="card-body">
+								{{$kelas->deskripsi}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
 
+<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+		<!-- Modal content-->
+			<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">×</button>
+							<h2 class="modal-title">Upload</h2>
+					</div>
+					<div class="modal-body">
+			       		<form action="{{ url('/tugas/upload/' . $tugas->id) }}" method="post" enctype="multipart/form-data">
+			        		{{ csrf_field() }}
+			 				<div class="form-group">
+								<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+								<input type="hidden" name="tugas_id" value="{{ $tugas->id }}">
+							</div>
+							<div class="form-group">
+								<input type="file" name="file_tugas">
+							</div>
+							<button type="submit" class="btn btn-lg btn-success btn-block" id="btnContactUs" >UPLOAD</button>
+		    			</form>
+					</div>	
+				</div>
+			</div>
+		</div>
 
 @stop

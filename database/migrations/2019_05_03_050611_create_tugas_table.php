@@ -23,7 +23,13 @@ class CreateTugasTable extends Migration
             $table->date('deadline')->nullable();
             $table->timestamps();
         });
+        DB::table('tugas')->insert([
+                'id' => '1',
+                
+            ]);
     }
+
+
 
     /**
      * Reverse the migrations.

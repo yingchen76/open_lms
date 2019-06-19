@@ -26,6 +26,11 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function indexlihat($id){
+        $user = User::find($id);
+        return view('Profile.lihat', compact('user'));
+
+    }
     public function create()
     {
         //

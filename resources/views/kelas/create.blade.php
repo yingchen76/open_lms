@@ -19,8 +19,8 @@
 							<input type="radio" name="jenis_kelas" value="public"> &nbsp;&nbsp;Public Class&nbsp;&nbsp;
 						</div>
 						<div class="form-group">
-							<label>Nama Guru</label>
-							<input type="text" name="" value="{{ Auth::user()->name }}" class="form-control">
+							<label>Deskripsi kelas</label>
+							<textarea name="deskripsi" class="form-control"> </textarea>
 							<input type="hidden" name="user_id" class="form-control" value="{{ Auth::user()->id }}" readonly>
 						</div>						
 						<button type="submit" class="btn btn-primary">Simpan</button>

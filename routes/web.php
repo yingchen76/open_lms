@@ -35,6 +35,7 @@ Auth::routes();
 Route::get('/tugas/index/{id}', ['middleware' => 'auth', 'uses' => 'TugasController@index']);
 Route::post('/tugas/new/{id}', ['middleware' => 'auth', 'uses' => 'TugasController@store']);
 Route::get('/tugas/lihat/{id}', ['middleware' => 'auth', 'uses' => 'TugasController@lihat']);
+Route::get('/tugas/daftar/{id}', ['middleware' => 'auth', 'uses' => 'TugasController@daftar']);
 
 Route::get('/tugas/upload/{id}', ['middleware' => 'auth', 'uses' => 'UploadController@index']);
 Route::post('/tugas/upload/{id}', ['middleware' => 'auth', 'uses' => 'UploadController@store']);
@@ -46,8 +47,11 @@ Route::get('/murid/new/{id}',['middleware' => 'auth', 'uses' => 'MuridController
 Route::post('/murid/new/{id}',['middleware' => 'auth', 'uses' => 'MuridController@store']);
 
 Route::get('/profile',['middleware' => 'auth', 'uses' => 'ProfileController@index']);
+Route::get('/profile/lihat/{id}',['middleware' => 'auth', 'uses' => 'ProfileController@indexlihat']);
 Route::get('/profile/edit/{id}',['middleware' => 'auth', 'uses' => 'ProfileController@edit']);
 Route::post('/profile/edit/{id}',['middleware' => 'auth', 'uses' => 'ProfileController@update']);
+Route::get('/profile/editakun/{id}',['middleware' => 'auth', 'uses' => 'ProfileController@editakun']);
+Route::post('/profile/editakun/{id}',['middleware' => 'auth', 'uses' => 'ProfileController@updateakun']);
 
 Route::get('/kelassaya', ['middleware' => 'auth', 'uses' => 'KelassayaController@index']);
 Route::get('/kelassaya/lihat/{id}', ['middleware' => 'auth', 'uses' => 'KelassayaController@lihat']);

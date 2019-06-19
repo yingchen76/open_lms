@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'LMS',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => 'LMS',
 
-    'logo_mini' => '<b>A</b>LT',
+    'logo_mini' => 'LMS',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,14 +108,21 @@ return [
     */
 
     'menu' => [
+        [
+            'text'        => 'Home',
+            'url'         => 'home',
+            'icon'        => 'file',
+        ],
+
         'MAIN NAVIGATION',
+       
         [
             'text'        => 'Kelas',
             'url'         => 'kelas',
             'icon'        => 'file',
         ],
 
-         [
+        [
             'text'        => 'Kelas Saya',
             'url'         => 'kelassaya',
             'icon'        => 'file',

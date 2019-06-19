@@ -29,7 +29,7 @@ class UploadController extends Controller
      */
     public function create()
     {
-        //
+        // 
     }
 
     /**
@@ -42,12 +42,12 @@ class UploadController extends Controller
     {
         //
         //$user= User::all();
-        $tugas= Tugas::find($id);
+        // $tugas= Tugas::find($id);
         $tugas = new Upload();
-        $request->validate([
-            'tugas_id'=> 'required',
-            'user_id' => 'required',
-        ]);
+        // $request->validate([
+        //     'tugas_id'=> 'required',
+        //     'user_id' => 'required',
+        // ]);
         $tempat_upload = public_path('/uploadx');
         $file = $request->file('file_tugas');
         $ext = $file->getClientOriginalExtension();
@@ -60,7 +60,7 @@ class UploadController extends Controller
         $tugas->user_id = $request->user_id;
         $tugas->file_tugas = $filename;
         $tugas->save();
-        return redirect('/kelassaya');
+        return redirect('/kelas');
     }
 
     /**

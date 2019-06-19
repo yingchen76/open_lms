@@ -15,38 +15,33 @@
 	@endforeach
 	
 </div>
-<a href="profile/edit/{{ Auth::user()->id }}" class="btn btn-primary">Edit Profile</a>
-<a href="profile/editakun/{{ Auth::user()->id }}" class="btn btn-primary">Edit Akun</a>
-			<table class="table table-bordered">
-				<tr>
-					<td>Nama Lengkap</td>
-					<td>{{ Auth::user()->name }}</td>
-				</tr>
-				<tr>
-					<td>NickName</td>
-					<td>{{ Auth::user()->nickname }}</td>
-				</tr>				
-				<tr>
-					<td>Email</td>
-					<td>{{ Auth::user()->email }}</td>
-				</tr>
-				<tr>
-					<td>Foto</td>
-					<td><img src="/user_picture/{{ Auth::user()->profile_picture }}"></td>
-				</tr>
-				<tr>
-					<td>Telepon</td>
-					<td>{{ Auth::user()->telepon }}</td>
-				</tr>
-				<tr>
-					<td>Deskripsi</td>
-					<td>{{ Auth::user()->deskripsi }}</td>
-				</tr>
-				<tr>
-					<td>Lokasi</td>
-					<td>{{ Auth::user()->lokasi }} </td>
-				</tr>
-			</table>
+<div class="col-md-3">
+		<img src="/user_picture/{{ Auth::user()->profile_picture }}" height="350" width="300">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-10">
+			<br>
+			<a href="profile/edit/{{ Auth::user()->id }}" class="btn btn-primary">Edit Profile</a>
+			<a href="profile/editakun/{{ Auth::user()->id }}" class="btn btn-primary">Edit Akun</a>
+		</div>
+	</div>
+<br><br>
+<tr>
+	<div class="col-md-8" style="font-family : Halvetica">
+	Nama: {{Auth::user()->name}}
+	<br><br>
+	Nickname: {{Auth::user()->nickname}}
+	<br><br>
+	Email: {{ Auth::user()->email}}
+	<br><br>
+	Telepon: {{ Auth::user()->telepon}}
+	<br><br>
+	Deskripsi: {{ Auth::user()->deskripsi}}
+	<br><br>
+	Lokasi: {{ Auth::user()->lokasi}}
+	</div>
+</tr>
+					
 @stop
 		
       <!-- END CUSTOM TABS -->

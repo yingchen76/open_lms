@@ -24,8 +24,9 @@ class KelasController extends Controller
         $tugases = Tugas::orderBy('created_at','desc')->get()->all();
         $murid = Murid::all();
         $kelass = Kelas::all();
+        $user = User::all();
         $kelas = Kelas::find($id);
-        return view('kelas/lihat', compact('murids','kelas','kelass', 'tugases', 'murid', 'post')); 
+        return view('kelas/lihat', compact('murids','kelas','kelass', 'tugases', 'murid', 'post', 'user')); 
     }
     
     public function create()
@@ -43,13 +44,15 @@ class KelasController extends Controller
        $request->validate([
             'nama_kelas' => 'required',
             'jenis_kelas' => 'required',
-            'user_id'=> 'required'
+            'user_id'=> 'required',
+            'deskripsi' => 'required'
             
         ]);
 
         $kelas->user_id = $request->user_id; 
         $kelas->nama_kelas = $request->nama_kelas;
         $kelas->jenis_kelas = $request->jenis_kelas;
+        $kelas->deskripsi = $request->deskripsi;
 
         $kelas->save();
         return redirect('kelas');

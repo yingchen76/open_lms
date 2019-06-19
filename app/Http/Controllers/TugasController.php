@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Tugas;
 use App\Kelas;
 use App\User;
+use App\Upload;
 
 class TugasController extends Controller
 {
@@ -26,11 +27,19 @@ class TugasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         //
         $kelas = User::all();
         return view('tugas.index', compact('kelas'));
+    }
+
+    public function daftar($id)
+    {
+        $uploads = Upload::select('tugas_id')->where('tugas_id',$id)->get();
+        return $uploads;
+        // return view('tugas.daftar', compact('uploads'));
     }
 
     public function lihat($id){

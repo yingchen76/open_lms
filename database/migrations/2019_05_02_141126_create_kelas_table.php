@@ -17,6 +17,7 @@ class CreateKelasTable extends Migration
             $table->increments('id');
             $table->string('nama_kelas');
             $table->string('jenis_kelas');
+            $table->string('deskripsi');
             $table->integer('user_id');
             $table->timestamps();
         });

@@ -90,7 +90,7 @@
 		                	@if ($tugas->nama_tugas != null)
 		                	<p class="btn btn-danger col-md-2" style="margin-top: 10px;">{{$tugas->deadline}}</p>
 		                	<div class="container-box rotated col-md-3" style="margin-top: 10px;">						
-								<button type="button" class="btn btn-primary col-md-5 btn-upload" data-toggle="modal" data-target="#myModal">Upload</button>				
+								<button type="button" id="{{$tugas->id}}" class="btn btn-primary col-md-5 btn-upload" data-toggle="modal" data-target="#myModal">Upload</button>				
 							</div>
 		                	@endif
 		                </div>
@@ -154,7 +154,7 @@
 										<td>
 											<a href="/file/{{$tugas->file_tugas}}" class="btn btn-primary btn-sm col-md-5">Download</a>
 											<div class="container-box rotated">						
-												<button type="button" href="/tugas/lihat/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5 btn-upload" id="q" data-toggle="modal" data-target="#myModal">Upload</button>				
+												<button type="button" href="/tugas/lihat/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5 btn-upload" id="{{$tugas->id}}" data-toggle="modal" data-target="#myModal">Upload</button>				
 											</div>
 											<a href="/tugas/daftar/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5">Lihat Dokumen</a>
 										</td>

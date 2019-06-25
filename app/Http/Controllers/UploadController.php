@@ -52,13 +52,13 @@ class UploadController extends Controller
         $file = $request->file('file_tugas');
         $ext = $file->getClientOriginalExtension();
         $namafile= $file->getClientOriginalName();
-        $filename = $namafile;
-        $file->move($tempat_upload, $filename);
+
+        $file->move($tempat_upload, $namafile);
         
 
         $tugas->tugas_id = $request->tugas_id; 
         $tugas->user_id = $request->user_id;
-        $tugas->file_tugas = $filename;
+        $tugas->file_tugas = $namafile;
         $tugas->save();
         return redirect('/kelas');
     }

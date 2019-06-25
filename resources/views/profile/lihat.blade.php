@@ -3,7 +3,7 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-	<h1>Profile Setting</h1>
+	<h1>Profile </h1>
 @stop
 
 
@@ -34,7 +34,10 @@
 				</tr>
 				<tr>
 					<td>Telepon</td>
+					@if($user->tlp_show == 'show')
 					<td>{{ $user->telepon }}</td>
+					@else <td style="color: red;">{{"hidden"}}</td>
+					@endif
 				</tr>
 				<tr>
 					<td>Deskripsi</td>
@@ -42,7 +45,10 @@
 				</tr>
 				<tr>
 					<td>Lokasi</td>
-					<td>{{ $user->lokasi }} </td>
+					@if($user->lks_show == 'show')
+					<td>{{ $user->lokasi }}</td>
+					@else <td style="color: red;">{{"hidden"}}</td>
+					@endif
 				</tr>
 			</table>
 @stop

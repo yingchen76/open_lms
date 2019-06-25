@@ -38,8 +38,8 @@ class TugasController extends Controller
     public function daftar($id)
     {
         $uploads = Upload::select('tugas_id')->where('tugas_id',$id)->get();
-        return $uploads;
-        // return view('tugas.daftar', compact('uploads'));
+        // return $uploads;
+        return view('tugas.daftar', compact('uploads'));
     }
 
     public function lihat($id){
@@ -67,7 +67,7 @@ class TugasController extends Controller
         //     'deskripsi' => 'required',
         //     //'file_tugas' => 'file|image|mimes: doc,docx,jpeg,pdf,JPG,png,svg',
         //     'deadline'=> 'required'    
-        // ]);
+        // ]); 
         if ($request->file('file_tugas') != null ){
             $tempat_upload = public_path('/file');
             $file = $request->file('file_tugas');
@@ -75,7 +75,7 @@ class TugasController extends Controller
             $namafile= $file->getClientOriginalName();
             $filename = $namafile;
             $file->move($tempat_upload, $filename);
-              $tugas->file_tugas = $filename;
+            $tugas->file_tugas = $filename;
         }
         
 

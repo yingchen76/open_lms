@@ -15,7 +15,7 @@
 	@endforeach
 	
 </div>
-<div class="col-md-3">
+<div class="col-md-4">
 		<img src="/user_picture/{{ Auth::user()->profile_picture }}" height="350" width="300">
 		<div class="col-md-2">
 		</div>
@@ -27,7 +27,7 @@
 	</div>
 <br><br>
 <tr>
-	<div class="col-md-8" style="font-family : Halvetica">
+	<div class="col-md-8" style="font-family : Halvetica; ">
 	Nama: {{Auth::user()->name}}
 	<br><br>
 	Nickname: {{Auth::user()->nickname}}

@@ -43,9 +43,10 @@
 						<div>{{$message}}</div>
 					@endforeach
 				</div>
-          		<form action="{{ url('/kelas/post/' .$kelas->id) }}" method="post">
+          		<form action="{{ url('/kelas/post/' .$kelas->id) }}" method="post" enctype="multipart/form-data">
           			{{ csrf_field() }}
           			<input type="text" class="form-control" name="deskripsi">
+          			<input type="file" name="file_tugas" class="form-control">
           			<input type="hidden" value="{{$kelas->id}}" name="kelas_id">
           			<div class="form-group">
           				<input type="hidden" value="{{Auth::user()->id}}" name="user_id">
@@ -79,6 +80,7 @@
 			               	@else 
 			               	<h3 class="timeline-header"><a href="/profile/lihat/{{$tugas->kelas->user->id}}">{{$tugas->kelas->user->name}}</a>&nbsp; added a post </h3>
 			               	@endif
+			               
 		                @endif
 		                <div class="timeline-body" style="padding-bottom: 50px;">
 		                	{{$tugas->nama_tugas}}<br>
@@ -88,7 +90,7 @@
 		                	@if ($tugas->nama_tugas != null)
 		                	<p class="btn btn-danger col-md-2" style="margin-top: 10px;">{{$tugas->deadline}}</p>
 		                	<div class="container-box rotated col-md-3" style="margin-top: 10px;">						
-								<button type="button" class="btn btn-primary col-md-5" data-toggle="modal" data-target="#myModal">Upload</button>				
+								<button type="button" class="btn btn-primary col-md-5 btn-upload" data-toggle="modal" data-target="#myModal">Upload</button>				
 							</div>
 		                	@endif
 		                </div>
@@ -101,7 +103,7 @@
             <!-- timeline time label -->
 	            <!-- /.timeline-label -->
 	            <!-- timeline item -->
-	            @foreach($murid as $murid)
+	            @foreach($murids as $murid)
 	            @if($murid->kelas_id == $kelas->id)
 			        <li>
 			            <i class="fa fa-user-o bg-blue"></i>
@@ -109,12 +111,12 @@
 				                <span class="time"><i class="fa fa-clock-o"></i>{{$murid -> created_at}}</span>
 				                @if ($murid->kelas_id == $kelas->id)
 						            @if($murid->kelas->user->name == Auth::user()->name)
-				                	<h3 class="timeline-header"><a href="#">You</a>&nbsp; added {{$murid->user->name}}</h3>
+				                	<h3 class="timeline-header">You &nbsp; added <a href="/profile/lihat/{{$murid->user->id}}">{{$murid->user->name}}</a></h3>
 				                	@else 
 				                	 	@if($murid->user->name != Auth::user()->name)
-						               	<h3 class="timeline-header"><a href="#">{{$murid->kelas->user->name}}</a>&nbsp; added {{$murid->user->name}}</h3>
+						               	<h3 class="timeline-header"><a href="/profile/lihat/{{$murid->user->id}}">{{$murid->kelas->user->name}}</a>&nbsp; added <a href="/profile/lihat/{{$murid->user->id}}">{{$murid->user->name}}</a></h3>
 						               	@else 
-						               	<h3 class="timeline-header"><a href="#">{{$murid->kelas->user->name}}</a>&nbsp; added you</h3>
+						               	<h3 class="timeline-header"><a href="/profile/lihat/{{$murid->user->id}}">{{$murid->kelas->user->name}}</a>&nbsp; added you</h3>
 						               	@endif
 						            @endif
 				               	@endif
@@ -152,7 +154,7 @@
 										<td>
 											<a href="/file/{{$tugas->file_tugas}}" class="btn btn-primary btn-sm col-md-5">Download</a>
 											<div class="container-box rotated">						
-												<button type="button" href="/tugas/lihat/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5" data-toggle="modal" data-target="#myModal">Upload</button>				
+												<button type="button" href="/tugas/lihat/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5 btn-upload" id="q" data-toggle="modal" data-target="#myModal">Upload</button>				
 											</div>
 											<a href="/tugas/daftar/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5">Lihat Dokumen</a>
 										</td>
@@ -193,17 +195,17 @@
 							<th>Murid</th>
 							<th>Email</th>
 							
-						</tr>
-						@foreach ($murid as $murid)
-							@if ($murid->kelas_id == $kelas->id)
+						</tr> 
+							
+						@foreach ($murids as $m)
 						<tr>
 							
-							<td><img src="/user_picture/{{$murid->user->profile_picture}}" height="150">{{$murid->user->name}}</td>
-							<td>{{$murid->user->email}} </td>
+								<td><a href="/profile/lihat/{{$m->user->id}}"><img src="/user_picture/{{$m->user->profile_picture}}" height="50">{{$m->user->name}}</a></td>
+								<td>{{$m->user->email}} </td>
 							
 						</tr>
-							@endif
-							@endforeach
+						@endforeach
+							
 					</table>
 		</div>
 		<div class="tab-pane" id="four" role="tabpanel" aria-labelledby="four-tab">
@@ -236,7 +238,7 @@
 			        		{{ csrf_field() }}
 			 				<div class="form-group">
 								<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-								<input type="hidden" name="tugas_id" value="{{ $tugas->id }}">
+								<input type="hidden" name="tugas_id" id="tugas_id">
 							</div>
 							<div class="form-group">
 								<input type="file" name="file_tugas">
@@ -248,4 +250,13 @@
 			</div>
 		</div>
 
+@stop
+@section('custom_js')
+<script type="text/javascript">
+	$('.btn-upload').click(function(){
+		tugas_id = $(this).attr("id");
+		// alert($(this).attr("id"));
+		$('#tugas_id').val(tugas_id);
+	})
+</script>
 @stop

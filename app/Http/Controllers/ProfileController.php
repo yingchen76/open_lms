@@ -97,6 +97,17 @@ class ProfileController extends Controller
             }
         }
 
+        if($request->tlp_show == 'hide'){
+            $user->tlp_show = $request->tlp_show;
+        }else{
+            $user->tlp_show = 'show';
+        }
+        if($request->lks_show == 'hide'){
+            $user->tlp_show = $request->tlp_show;
+        }else{
+            $user->lks_show = 'show';
+        }
+
         $user->name = $request->name;
         $user->nickname = $request->nickname;
         $user->telepon = $request->telepon;

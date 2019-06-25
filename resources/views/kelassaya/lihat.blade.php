@@ -19,8 +19,8 @@
 								<th>Action</th>
 							</tr>
 							
+								@foreach($murids as $murid)
 							<tr>
-								@foreach($murid as $murid)
 			     					@if($murid->user_id == Auth::user()->id)   	
 			     					<td>{{$murid->kelas->nama_kelas}}</td>
 			     					<td>{{$murid->kelas->jenis_kelas}}</td>
@@ -29,8 +29,8 @@
 			     						<a href="/kelassaya/lihat/{{$murid->kelas_id}}" class="btn btn-primary btn-sm col-md-2">View</a>
 			     					</td>
 			     					@endif
-		       					@endforeach
 							</tr>
+		       					@endforeach
 						</table>
 	          </div>
 

@@ -30,6 +30,13 @@
          <div class="form-group">
             <label>Telepon</label>
             <input type="text" name="telepon" class="form-control" value="{{ Auth::user()->telepon }}" >
+            @if(Auth::user()->tlp_show == 'hide')
+            <input type="checkbox" name="tlp_show" value="hide" checked> hide 
+            @else 
+            <input type="checkbox" name="tlp_show" value="hide"> hide 
+          
+          @endif
+
         </div>
         <div class="form-group">
             <label>Deskripsi</label>
@@ -38,6 +45,11 @@
         <div class="form-group">
             <label>Lokasi</label>
               <input type="text" name="lokasi" class="form-control" value="{{ Auth::user()->lokasi }}" >
+              @if(Auth::user()->tlp_show == 'hide')
+              <input type="checkbox" name="lks_show" value="hide" checked> hide 
+              @else 
+              <input type="checkbox" name="lks_show" value="hide"> hide 
+              @endif
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>

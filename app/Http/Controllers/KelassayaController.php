@@ -7,7 +7,7 @@ use App\post;
 use App\Kelas;
 use App\User;
 use App\Murid;
-use App\Tugas;
+use App\Tugas; 
 class KelassayaController extends Controller
 {
     /**
@@ -17,7 +17,7 @@ class KelassayaController extends Controller
      */
     public function index()
     {
-        $murid = Murid::all();
+        $murids = Murid::all();
         return view ('kelassaya.lihat', compact('murid'));
     }
 
@@ -28,7 +28,7 @@ class KelassayaController extends Controller
         $murid = Murid::all();
         $kelass = Kelas::all();
         $kelas = Kelas::find($id);
-        return view('kelas.lihat', compact('kelas','kelass', 'tugases', 'murid', 'post')); 
+        return view('kelas.lihat', compact('kelas','kelass', 'tugases', 'murids', 'post')); 
     }
 
     /**

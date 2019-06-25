@@ -22,11 +22,12 @@ class KelasController extends Controller
     {
         // 
         $tugases = Tugas::orderBy('created_at','desc')->get()->all();
-        $murid = Murid::all();
-        $kelass = Kelas::all();
+        // $murid = Murid::all();
+        $murids = Murid::where('kelas_id',$id)->get();
+        // $kelass = Kelas::all();
         $user = User::all();
         $kelas = Kelas::find($id);
-        return view('kelas/lihat', compact('murids','kelas','kelass', 'tugases', 'murid', 'post', 'user')); 
+        return view('kelas/lihat', compact('murids','kelas', 'tugases', 'post', 'user')); 
     }
     
     public function create()
@@ -59,14 +60,20 @@ class KelasController extends Controller
     }
     public function post( Request $request){
         $post = new Tugas();
-        $request->validate([
-            'user_id' => 'required',
-            'kelas_id' => 'required',
-            'deskripsi' => 'required'
-        ]);
+        
+        if ($request->file('file_tugas') != null ){
+            $tempat_upload = public_path('/file');
+            $file = $request->file('file_tugas');
+            $ext = $file->getClientOriginalExtension();
+            $namafile= $file->getClientOriginalName();
+            $file->move($tempat_upload, $namafile);
+            $request->file_tugas = $namafile;
+        }
+        
         $post->user_id=$request->user_id;
         $post->kelas_id=$request->kelas_id;
         $post->deskripsi=$request->deskripsi;
+        $post->file_tugas=$request->file_tugas;;
         // return $request->deskripsi;
         $post->save();
 

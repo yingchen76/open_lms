@@ -15,7 +15,7 @@ class KelasController extends Controller
         // 
         $murid = Murid::all();
         $tugas= Tugas::all();
-        $kelas = Kelas::all();
+        $kelas = Kelas::all(); 
         return view('kelas.index', compact('kelas')); 
     }
     public function lihat($id)
@@ -29,7 +29,6 @@ class KelasController extends Controller
         $kelas = Kelas::find($id);
         return view('kelas/lihat', compact('murids','kelas', 'tugases', 'post', 'user')); 
     }
-    
     public function create()
     {
         //

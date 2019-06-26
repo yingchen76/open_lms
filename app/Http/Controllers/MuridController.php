@@ -39,6 +39,11 @@ class MuridController extends Controller
         return view ('murid.create', compact('kelas','murid'));
     }
 
+    public function rate($id)
+    {
+        
+    }
+
     /**
      * Store a newly created resource in storage.
      *

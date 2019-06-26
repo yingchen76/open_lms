@@ -7,7 +7,7 @@
 	@stop
 
 
-	@section('content')
+	@section('content') 
 	<!-- START CUSTOM TABS -->
 
 

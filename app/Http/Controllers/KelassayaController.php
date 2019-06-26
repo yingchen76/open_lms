@@ -18,14 +18,14 @@ class KelassayaController extends Controller
     public function index()
     {
         $murids = Murid::all();
-        return view ('kelassaya.lihat', compact('murid'));
+        return view ('kelassaya.lihat', compact('murids'));
     }
 
     public function lihat($id)
     {
         // 
         $tugases = Tugas::orderBy('created_at','desc')->get()->all();
-        $murid = Murid::all();
+        $murids = Murid::where('kelas_id',$id)->get();
         $kelass = Kelas::all();
         $kelas = Kelas::find($id);
         return view('kelas.lihat', compact('kelas','kelass', 'tugases', 'murids', 'post')); 

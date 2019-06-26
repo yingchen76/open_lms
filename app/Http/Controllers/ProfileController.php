@@ -87,7 +87,7 @@ class ProfileController extends Controller
         $user = User::find($id);
         if($request->hasFile('profile_picture')){
             if ($request->file('profile_picture') != null){
-                $tempat_upload = public_path('/user_picture');
+                $tempat_upload = public_path('/user_picture'); 
                 $file = $request->file('profile_picture');
                 $ext = $file->getClientOriginalExtension();
                 $namafile= $file->getClientOriginalName();
@@ -103,7 +103,7 @@ class ProfileController extends Controller
             $user->tlp_show = 'show';
         }
         if($request->lks_show == 'hide'){
-            $user->tlp_show = $request->tlp_show;
+            $user->lks_show = $request->lks_show;
         }else{
             $user->lks_show = 'show';
         }

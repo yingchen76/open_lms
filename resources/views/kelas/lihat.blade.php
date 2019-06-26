@@ -57,76 +57,76 @@
           	<br>
 
           	<div class="col-md-12">
-		    <ul class="timeline col-md-9">
-	            @foreach($tugases as $tugas)
-	            @if($tugas->kelas_id == $kelas->id)
-	            <li>
-	             @if ($tugas->nama_tugas != null)
-	              	<i class="fa fa-reorder bg-blue"></i>
-	             @else
-	             	<i class="fa fa-comment-o bg-blue"></i>
-	             @endif 
-		              <div class="timeline-item">
-		                <span class="time"><i class="fa fa-clock-o"></i>{{$tugas -> created_at}}</span>
-		                @if ($tugas->nama_tugas != null)
-		                	@if($tugas->kelas->user->name == Auth::user()->name)
-		                	<h3 class="timeline-header">You&nbsp; added a assignment </h3>
-		                	@else 
-		                	<h3 class="timeline-header"><a href="/profile/lihat/{{$tugas->kelas->user->id}}">{{$tugas->kelas->user->name}}</a>&nbsp; added a assignment </h3>
-		                	@endif
-		                @else 
-			                @if($tugas->kelas->user->name == Auth::user()->name)
-			               	<h3 class="timeline-header">You&nbsp; added a post </h3>
-			               	@else 
-			               	<h3 class="timeline-header"><a href="/profile/lihat/{{$tugas->kelas->user->id}}">{{$tugas->kelas->user->name}}</a>&nbsp; added a post </h3>
-			               	@endif
-			               
-		                @endif
-		                <div class="timeline-body" style="padding-bottom: 50px;">
-		                	{{$tugas->nama_tugas}}<br>
-		                	{{$tugas->deskripsi}}<br>
-		                	<img src="">
-		                	<a href="/file/{{$tugas->file_tugas}}" src="/file/{{$tugas->file_tugas}}">{{$tugas->file_tugas}}</a><br>
-		                	@if ($tugas->nama_tugas != null)
-		                	<p class="btn btn-danger col-md-2" style="margin-top: 10px;">{{$tugas->deadline}}</p>
-		                	<div class="container-box rotated col-md-3" style="margin-top: 10px;">						
-								<button type="button" id="{{$tugas->id}}" class="btn btn-primary col-md-5 btn-upload" data-toggle="modal" data-target="#myModal">Upload</button>				
-							</div>
-		                	@endif
-		                </div>
-		              </div>
-	            </li>
-	            @endif
-	            @endforeach
-        	</ul>
-        	<ul class="timeline col-md-3 box-body">
-            <!-- timeline time label -->
-	            <!-- /.timeline-label -->
-	            <!-- timeline item -->
-	            @foreach($murids as $murid)
-	            @if($murid->kelas_id == $kelas->id)
-			        <li>
-			            <i class="fa fa-user-o bg-blue"></i>
-					         <div class="timeline-item">
-				                <span class="time"><i class="fa fa-clock-o"></i>{{$murid -> created_at}}</span>
-				                @if ($murid->kelas_id == $kelas->id)
-						            @if($murid->kelas->user->name == Auth::user()->name)
-				                	<h3 class="timeline-header">You &nbsp; added <a href="/profile/lihat/{{$murid->user->id}}">{{$murid->user->name}}</a></h3>
-				                	@else 
-				                	 	@if($murid->user->name != Auth::user()->name)
-						               	<h3 class="timeline-header"><a href="/profile/lihat/{{$murid->user->id}}">{{$murid->kelas->user->name}}</a>&nbsp; added <a href="/profile/lihat/{{$murid->user->id}}">{{$murid->user->name}}</a></h3>
-						               	@else 
-						               	<h3 class="timeline-header"><a href="/profile/lihat/{{$murid->user->id}}">{{$murid->kelas->user->name}}</a>&nbsp; added you</h3>
-						               	@endif
-						            @endif
+			    <ul class="timeline col-md-9">
+		            @foreach($tugases as $tugas)
+		            @if($tugas->kelas_id == $kelas->id)
+		            <li>
+		             @if ($tugas->nama_tugas != null)
+		              	<i class="fa fa-reorder bg-blue"></i>
+		             @else
+		             	<i class="fa fa-comment-o bg-blue"></i>
+		             @endif 
+			              <div class="timeline-item">
+			                <span class="time"><i class="fa fa-clock-o"></i>{{$tugas -> created_at}}</span>
+			                @if ($tugas->nama_tugas != null)
+			                	@if($tugas->kelas->user->name == Auth::user()->name)
+			                	<h3 class="timeline-header">You&nbsp; added a assignment </h3>
+			                	@else 
+			                	<h3 class="timeline-header"><a href="/profile/lihat/{{$tugas->kelas->user->id}}">{{$tugas->kelas->user->name}}</a>&nbsp; added a assignment </h3>
+			                	@endif
+			                @else 
+				                @if($tugas->kelas->user->name == Auth::user()->name)
+				               	<h3 class="timeline-header">You&nbsp; added a post </h3>
+				               	@else 
+				               	<h3 class="timeline-header"><a href="/profile/lihat/{{$tugas->kelas->user->id}}">{{$tugas->kelas->user->name}}</a>&nbsp; added a post </h3>
 				               	@endif
-				            </div>
-			   		</li>
-			   	@endif	
-		        @endforeach
-		    </ul>
+				               
+			                @endif
+			                <div class="timeline-body" style="padding-bottom: 50px;">
+			                	{{$tugas->nama_tugas}}<br>
+			                	{{$tugas->deskripsi}}<br>
+			                	<img src="">
+			                	<a href="/file/{{$tugas->file_tugas}}" src="/file/{{$tugas->file_tugas}}">{{$tugas->file_tugas}}</a><br>
+			                	@if ($tugas->nama_tugas != null)
+			                	<p class="btn btn-danger col-md-2" style="margin-top: 10px;">{{$tugas->deadline}}</p>
+			                	<div class="container-box rotated col-md-3" style="margin-top: 10px;">						
+									<button type="button" id="{{$tugas->id}}" class="btn btn-primary col-md-5 btn-upload" data-toggle="modal" data-target="#myModal">Upload</button>				
+								</div>
+			                	@endif
+			                </div>
+			              </div>
+		            </li>
+		            @endif
+		            @endforeach
+	        	</ul>
+	        	<ul class="timeline col-md-3 box-body">
+	            <!-- timeline time label -->
+		            <!-- /.timeline-label -->
+		            <!-- timeline item -->
+		            @foreach($murids as $murid)
+		            @if($murid->kelas_id == $kelas->id)
+				        <li>
+				            <i class="fa fa-user-o bg-blue"></i>
+						         <div class="timeline-item">
+					                <span class="time"><i class="fa fa-clock-o"></i>{{$murid -> created_at}}</span>
+					                @if ($murid->kelas_id == $kelas->id)
+							            @if($murid->kelas->user->name == Auth::user()->name)
+					                	<h3 class="timeline-header">You &nbsp; added <a href="/profile/lihat/{{$murid->user->id}}">{{$murid->user->name}}</a></h3>
+					                	@else 
+					                	 	@if($murid->user->name != Auth::user()->name)
+							               	<h3 class="timeline-header"><a href="/profile/lihat/{{$murid->kelas->user->id}}">{{$murid->kelas->user->name}}</a>&nbsp; added <a href="/profile/lihat/{{$murid->user->id}}">{{$murid->user->name}}</a></h3>
+							               	@else 
+							               	<h3 class="timeline-header"><a href="/profile/lihat/{{$murid->kelas->user->id}}">{{$murid->kelas->user->name}}</a>&nbsp; added you</h3>
+							               	@endif
+							            @endif
+					               	@endif
+					            </div>
+				   		</li>
+				   	@endif	
+			        @endforeach
+			    </ul>
 		   </div>`
-</div>
+		  </div>
 		<div class="tab-pane" id="two" role="tabpanel" aria-labelledby="two-tab">
           	<br>
           	@if($kelas->user_id == Auth::user()->id)
@@ -215,6 +215,23 @@
 						<div class="card">
 							<div class="card-body">
 								{{$kelas->deskripsi}}
+								<div class="container">
+								  <div class="row">
+								    <div class="col-lg-12">
+								      <div class="star-rating">
+								        <span class="fa fa-star-o" data-rating="1" style="color: yellow;"></span>
+								        <span class="fa fa-star-o" data-rating="2" style="color: yellow;"></span>
+								        <span class="fa fa-star-o" data-rating="3" style="color: yellow;"></span>
+								        <span class="fa fa-star-o" data-rating="4" style="color: yellow;"></span>
+								        <span class="fa fa-star-o" data-rating="5" style="color: yellow;"></span>
+								        <input type="hidden" name="rate" class="rating-value" id="rating">
+								        <input type="hidden" name="kelas_id" value="{{kelas->id}}">
+								       	<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+								        <button type="button" id="rating" class="btn btn-primary col-md-5 btn-rate">rate</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -257,6 +274,36 @@
 		tugas_id = $(this).attr("id");
 		// alert($(this).attr("id"));
 		$('#tugas_id').val(tugas_id);
+	})
+</script>
+
+<script type="text/javascript">
+	var $star_rating = $('.star-rating .fa');
+
+	var SetRatingStar = function() {
+	  return $star_rating.each(function() {
+	    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+	      return $(this).removeClass('fa-star-o').addClass('fa-star');
+	    } else {
+	      return $(this).removeClass('fa-star').addClass('fa-star-o');
+	    }
+	  });
+	};
+
+	$star_rating.on('click', function() {
+	  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+	  return SetRatingStar();
+	});
+
+	SetRatingStar();
+	$(document).ready(function() {
+
+	});
+
+	$('.btn-rate').click(function(){
+		rating = $(this).attr("id");
+		// alert($(this).attr("id"));
+		$('#rating').val(rating); 
 	})
 </script>
 @stop

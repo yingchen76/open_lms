@@ -17,7 +17,7 @@ class CreateMuridsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('kelas_id');
             $table->integer('user_id'); 
-            $table->integer('rate')->nullable();
+            $table->integer('rating')->nullable();
 
             $table->timestamps();
         });

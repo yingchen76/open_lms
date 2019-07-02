@@ -24,6 +24,7 @@ class KelasController extends Controller
         $tugases = Tugas::orderBy('created_at','desc')->get()->all();
         // $murid = Murid::all();
         $murids = Murid::where('kelas_id',$id)->get();
+
         // $kelass = Kelas::all();
         $user = User::all();
         $kelas = Kelas::find($id);
@@ -36,6 +37,17 @@ class KelasController extends Controller
             return view('kelas.create', compact('users'));
         
     }
+    // public function cari(Request $request)
+    // {
+    //     // menangkap data pencarian
+    //     $cari = $request->cari;
+ 
+    //         // mengambil data dari table pegawai sesuai pencarian data
+    //     $kelas = Kelas::select('nama_kelas','user_id')->where('nama_kelas','like',"%".$cari."%");
+ 
+    //         // mengirim data pegawai ke view index
+    //     return view('/kelas/cari', compact('kelas'));
+    // }
   
     public function store(Request $request)
     {
@@ -122,5 +134,20 @@ class KelasController extends Controller
         $tugas->delete();  
         // return $murid;
         return redirect('kelas');
+    }
+
+    public function rating(Request $request){
+        
+        $murid_kelas = Murid::where('kelas_id',$request->kelas_id)
+                        ->where('user_id',$request->user_id)->first(); 
+
+        $rating = Murid::find($murid_kelas->id);
+        $murid_kelas->kelas_id =  $request->kelas_id;
+        $murid_kelas->user_id = $request->user_id;
+        $murid_kelas->id = $murid_kelas->id;
+        $murid_kelas->rating = $request->rating;
+        $murid_kelas->save(); 
+
+        return view('kelas/lihat/'.$request->kelas_id);   
     }
 }

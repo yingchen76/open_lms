@@ -37,7 +37,7 @@ class TugasController extends Controller
 
     public function daftar($id)
     {
-        $uploads = Upload::select('tugas_id')->where('tugas_id',$id)->get();
+        $uploads = Upload::select('tugas_id','file_tugas','user_id')->where('tugas_id',$id)->get(); 
         // return $uploads;
         return view('tugas.daftar', compact('uploads'));
     }

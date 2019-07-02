@@ -19,6 +19,7 @@ class CreateKelasTable extends Migration
             $table->string('jenis_kelas');
             $table->string('deskripsi');
             $table->integer('user_id');
+            $table->integer('rating')->nullable();
             $table->timestamps();
         });
     }

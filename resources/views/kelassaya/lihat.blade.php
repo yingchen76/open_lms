@@ -26,7 +26,7 @@
 			     					<td>{{$murid->kelas->jenis_kelas}}</td>
 			     					<td>{{$murid->kelas->user->name}}</td>
 			     					<td>
-			     						<a href="/kelassaya/lihat/{{$murid->kelas_id}}" class="btn btn-primary btn-sm col-md-2">View</a>
+			     						<a href="/kelassaya/lihat/{{$murid->kelas_id}}" class="btn btn-primary btn-sm col-md-3">View</a>
 			     					</td>
 			     					@endif
 							</tr>

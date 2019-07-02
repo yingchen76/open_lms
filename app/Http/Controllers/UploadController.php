@@ -60,7 +60,7 @@ class UploadController extends Controller
         $tugas->user_id = $request->user_id;
         $tugas->file_tugas = $namafile;
         $tugas->save();
-        return redirect('/kelas');
+        return redirect('/kelassaya');
     }
 
     /**

@@ -29,6 +29,9 @@ Route::delete('/kelas/delete/{id}', ['middleware' => 'auth', 'uses' => 'KelasCon
 Route::get('/kelas/lihat/{id}', ['middleware' => 'auth', 'uses' => 'KelasController@lihat']);
 Route::get('/kelas/post/{id}', ['middleware' => 'auth', 'uses' => 'KelasController@post']);
 Route::post('/kelas/post/{id}', ['middleware' => 'auth', 'uses' => 'KelasController@post']);
+Route::post('/kelas/cari', ['middleware' => 'auth', 'uses' => 'KelasController@cari']);
+Route::post('/kelas/rating', ['middleware' => 'auth', 'uses' => 'KelasController@rating']);
+
 Route::get('/kelassaya', ['middleware' => 'auth', 'uses' => 'KelassayaController@index']);
 
 Auth::routes();
@@ -57,4 +60,5 @@ Route::get('/kelassaya', ['middleware' => 'auth', 'uses' => 'KelassayaController
 Route::get('/kelassaya/lihat/{id}', ['middleware' => 'auth', 'uses' => 'KelassayaController@lihat']);
 
 
+Route::post('/home/cari', ['middleware' => 'auth', 'uses' => 'HomeController@cari']);
 Route::get('/home', 'HomeController@index')->name('home');

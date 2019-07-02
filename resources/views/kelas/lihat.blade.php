@@ -89,9 +89,11 @@
 			                	<a href="/file/{{$tugas->file_tugas}}" src="/file/{{$tugas->file_tugas}}">{{$tugas->file_tugas}}</a><br>
 			                	@if ($tugas->nama_tugas != null)
 			                	<p class="btn btn-danger col-md-2" style="margin-top: 10px;">{{$tugas->deadline}}</p>
-			                	<div class="container-box rotated col-md-3" style="margin-top: 10px;">						
-									<button type="button" id="{{$tugas->id}}" class="btn btn-primary col-md-5 btn-upload" data-toggle="modal" data-target="#myModal">Upload</button>				
-								</div>
+			                		@if (Auth::user()->id != $tugas->kelas->user->id) 
+				                	<div class="container-box rotated col-md-3" style="margin-top: 10px;">		          
+										<button type="button" id="{{$tugas->id}}" class="btn btn-primary col-md-5 btn-upload" data-toggle="modal" data-target="#myModal">Upload</button>				
+									</div>
+									@endif
 			                	@endif
 			                </div>
 			              </div>
@@ -153,10 +155,14 @@
 										<td>{{$tugas->deadline}}</td>
 										<td>
 											<a href="/file/{{$tugas->file_tugas}}" class="btn btn-primary btn-sm col-md-5">Download</a>
+											@if (Auth::user()->id != $tugas->kelas->user->id) 
 											<div class="container-box rotated">						
 												<button type="button" href="/tugas/lihat/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5 btn-upload" id="{{$tugas->id}}" data-toggle="modal" data-target="#myModal">Upload</button>				
 											</div>
+											@endif
+											@if (Auth::user()->id == $tugas->kelas->user->id) 
 											<a href="/tugas/daftar/{{$tugas->id}}" class="btn btn-primary btn-sm col-md-5">Lihat Dokumen</a>
+											@endif
 										</td>
 									@endif
 								@endif
@@ -213,26 +219,29 @@
 				<div class="row justify-content-center">
 					<div class="col-md-8">
 						<div class="card">
-							<div class="card-body">
-								{{$kelas->deskripsi}}
-								<div class="container">
-								  <div class="row">
-								    <div class="col-lg-12">
+							<div class="card-body col-md-12">
+
+								<div class="col-md-12">
+									{{$kelas->deskripsi}}
+									<p style="font-size: 35px;">{{$murids->avg('rating')}}</p>
+									<p style="margin-top: -18px;">rating</p>
+								
+								<div class="row col-md-8">
+								    <div>
 								      <div class="star-rating">
-								        <span class="fa fa-star-o" data-rating="1" style="color: yellow;"></span>
-								        <span class="fa fa-star-o" data-rating="2" style="color: yellow;"></span>
-								        <span class="fa fa-star-o" data-rating="3" style="color: yellow;"></span>
-								        <span class="fa fa-star-o" data-rating="4" style="color: yellow;"></span>
-								        <span class="fa fa-star-o" data-rating="5" style="color: yellow;"></span>
-								        <input type="hidden" name="rate" class="rating-value" id="rating">
-								        <input type="hidden" name="kelas_id" value="{{kelas->id}}">
-								       	<input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-								        <button type="button" id="rating" class="btn btn-primary col-md-5 btn-rate">rate</button>
+								        <span class="fa fa-star-o rating" data-rating="1" style="font-size:35px;"></span>
+								        <span class="fa fa-star-o rating" data-rating="2" style="font-size:35px;"></span>
+								        <span class="fa fa-star-o rating" data-rating="3" style="font-size:35px;"></span>
+								        <span class="fa fa-star-o rating" data-rating="4" style="font-size:35px;"></span>
+								        <span class="fa fa-star-o rating" data-rating="5" style="font-size:35px;"></span>
+								        <input type="hidden" name="whatever1" class="rating-value" value="{{$murids->avg('rating')}}">
 								      </div>
 								    </div>
-								  </div>
 								</div>
+							</div> 
 							</div>
+						
+							
 						</div>
 					</div>
 				</div>
@@ -269,41 +278,56 @@
 
 @stop
 @section('custom_js')
-<script type="text/javascript">
-	$('.btn-upload').click(function(){
-		tugas_id = $(this).attr("id");
-		// alert($(this).attr("id"));
-		$('#tugas_id').val(tugas_id);
-	})
-</script>
+	<script type="text/javascript">
+		$('.btn-upload').click(function(){
+			tugas_id = $(this).attr("id");
+			// alert($(this).attr("id"));
+			$('#tugas_id').val(tugas_id);
+		})
+	</script>
 
-<script type="text/javascript">
-	var $star_rating = $('.star-rating .fa');
+	<script type="text/javascript">
+		var $star_rating = $('.star-rating .fa');
 
-	var SetRatingStar = function() {
-	  return $star_rating.each(function() {
-	    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-	      return $(this).removeClass('fa-star-o').addClass('fa-star');
-	    } else {
-	      return $(this).removeClass('fa-star').addClass('fa-star-o');
-	    }
-	  });
-	};
+		var SetRatingStar = function() {
+		  return $star_rating.each(function() {
+		    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+		      return $(this).removeClass('fa-star-o').addClass('fa-star');
+		    } else {
+		      return $(this).removeClass('fa-star').addClass('fa-star-o');
+		    }
+		  });
+		};
 
-	$star_rating.on('click', function() {
-	  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
-	  return SetRatingStar();
-	});
+		$star_rating.on('click', function() {
+		  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+		  return SetRatingStar();
+		});
 
-	SetRatingStar();
-	$(document).ready(function() {
+		SetRatingStar();
+		$(document).ready(function() {
 
-	});
+		});
 
-	$('.btn-rate').click(function(){
-		rating = $(this).attr("id");
-		// alert($(this).attr("id"));
-		$('#rating').val(rating); 
-	})
-</script>
+		$(".rating").click(function(){
+			var rating = $(this).attr("data-rating");
+			var kelas_id = {{$kelas->id}};
+			var user_id = {{Auth::user()->id}};
+			// alert(kelas_id);
+			$.ajax({
+				url: '{{url("/kelas/rating")}}',
+				data: {rating: rating, kelas_id: kelas_id, user_id: user_id},
+				headers: {'X-CSRF-Token': '{{csrf_token()}}'},
+				type: 'POST',
+				success: function(result){
+					alert(result);
+					console.log("test"); 
+				},
+				error: function(result){
+					console.log("try again");
+					console.log("error");
+				}
+			});
+		}); 
+	</script>
 @stop

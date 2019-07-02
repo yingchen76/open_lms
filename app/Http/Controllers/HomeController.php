@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Kelas;
 
 class HomeController extends Controller
 {
@@ -18,11 +20,23 @@ class HomeController extends Controller
 
     /**
      * Show the application dashboard.
-     *
+     *m
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('home');
+        $kelas = Kelas::all();
+        $user = User::all();
+       
+        return view('home', compact('kelas', 'user'));
     }
+
+
+     public function cari(Request $request)
+    {   
+      
+        $kelas = Kelas::where('nama_kelas', 'LIKE', '%'.$request->cari.'%')->get();       
+          return view('home', compact('kelas'));
+    }
+    
 }
